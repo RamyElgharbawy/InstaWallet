@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   createIcon,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function HeroPage() {
   return (
@@ -46,6 +47,8 @@ export default function HeroPage() {
             position={"relative"}
           >
             <Button
+              as={Link}
+              to={"/login"}
               colorScheme={"green"}
               bg={"green.400"}
               rounded={"full"}

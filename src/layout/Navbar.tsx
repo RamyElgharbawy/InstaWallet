@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Stack,
   useColorMode,
+  Text,
 } from "@chakra-ui/react";
 
 import { Link as RouterLink } from "react-router-dom";
@@ -24,6 +25,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose, MdOutlineWbSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
+import { TbLogin2 } from "react-icons/tb";
+import Logo from "../components/Logo";
 
 interface Props {
   children: React.ReactNode;
@@ -66,7 +69,7 @@ export default function Navbar() {
           />
           {/* Navbar Links Section  */}
           <HStack spacing={8} alignItems={"center"}>
-            <Box>InstaWallet</Box>
+            <Logo />
 
             <HStack
               as={"nav"}
@@ -81,16 +84,21 @@ export default function Navbar() {
           {/* Right Section [userDropDown Menu, Theme Mode]  */}
           <Flex alignItems={"center"} gap={3}>
             {/* Login  */}
-            <Button
-              variant={"solid"}
-              colorScheme={"teal"}
-              size={"sm"}
-              display={{ md: "block", base: "none" }}
+            <Text
+              as={RouterLink}
+              to={"/login"}
+              display={{ md: "flex", base: "none" }}
               mr={2}
-              //   leftIcon={<AddIcon />}
+              p={2}
+              rounded={10}
+              alignItems={"center"}
+              gap={1}
+              bgColor={"green.500"}
+              _hover={{ bgColor: "green.400" }}
             >
               Login
-            </Button>
+              {<TbLogin2 size={20} />}
+            </Text>
             {/* User Profile */}
             <Menu>
               <MenuButton
@@ -116,12 +124,13 @@ export default function Navbar() {
             </Menu>
             {/* Theme Mode  */}
             <Stack direction={"row"} spacing={7}>
-              <Button p={0} onClick={toggleColorMode}>
-                {colorMode === "light" ? (
-                  <FaMoon size={19} />
-                ) : (
-                  <MdOutlineWbSunny size={20} />
-                )}
+              <Button
+                size="lg"
+                variant="ghost"
+                display={{ base: "none", md: "flex" }}
+                onClick={toggleColorMode}
+              >
+                {colorMode === "light" ? <FaMoon /> : <MdOutlineWbSunny />}
               </Button>
             </Stack>
           </Flex>
