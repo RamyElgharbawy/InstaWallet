@@ -1,9 +1,12 @@
 import { Box } from "@chakra-ui/react";
+import TableWithHeading from "../components/shared/TableWithHeading";
+import ActiveSection from "../components/ActiveSection";
 
 const FellowsPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <h1>Fellows Page ......................</h1>
+      <ActiveSection />
+      <TableWithHeading tvariant="simple" title="My Fellows" />
     </Box>
   );
 };

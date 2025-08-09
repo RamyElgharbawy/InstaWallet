@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Link as RouterLink } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 // import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -27,18 +28,23 @@ import { MdClose, MdOutlineWbSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 import { TbLogin2 } from "react-icons/tb";
 import Logo from "../components/Logo";
+import {} from "react-router-hash-link";
 
 interface Props {
   children: React.ReactNode;
+  to: string;
 }
 
-const Links = ["Feature", "How it Works", "Team"];
+const Links = ["Feature", "How it Works"];
 
 const NavLink = (props: Props) => {
   const { children } = props;
+
   return (
     <Box
-      as={RouterLink}
+      as={Link}
+      smooth
+      to={props.to}
       px={2}
       py={1}
       rounded={"md"}
@@ -77,7 +83,12 @@ export default function Navbar() {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink
+                  to={`#${link.toLocaleLowerCase().replaceAll(" ", "-")}`}
+                  key={link}
+                >
+                  {link}
+                </NavLink>
               ))}
             </HStack>
           </HStack>
@@ -116,10 +127,10 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem>User Profile</MenuItem>
+                <MenuItem>Dashboard</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>Logout</MenuItem>
               </MenuList>
             </Menu>
             {/* Theme Mode  */}

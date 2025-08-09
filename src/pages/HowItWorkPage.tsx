@@ -42,7 +42,7 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 
 export default function HowItWorkPage() {
   return (
-    <Box p={4} mt={20}>
+    <Box id="how-it-works" p={4} mt={20}>
       <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
         <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
           How It Works

@@ -21,16 +21,15 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import type { BoxProps, FlexProps } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
+import { FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import Logo from "../components/Logo";
 import ColorModeToggleButton from "../components/ColorModeToggleButton";
 import { Link as RouterLink } from "react-router-dom";
-import { GiPayMoney, GiTakeMyMoney } from "react-icons/gi";
 import { SiShopify } from "react-icons/si";
 import { TbPigMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
-import { FcMoneyTransfer } from "react-icons/fc";
+import { FcMoneyTransfer, FcStatistics } from "react-icons/fc";
 
 interface LinkItemProps {
   name: string;
@@ -52,7 +51,7 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
+  { name: "Statistics", icon: FcStatistics },
   { name: "Items", icon: SiShopify },
   { name: "Loan", icon: FcMoneyTransfer },
   { name: "Fellows", icon: TbPigMoney },

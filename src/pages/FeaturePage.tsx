@@ -65,7 +65,7 @@ const Card = ({ heading, description, icon }: CardProps) => {
 
 export default function FeaturePage() {
   return (
-    <Box id="f-page" p={4}>
+    <Box id="feature" p={4}>
       <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
         <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
           Why Choose InstaWallet?
