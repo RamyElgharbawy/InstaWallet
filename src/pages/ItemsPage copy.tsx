@@ -2,13 +2,13 @@ import { Box } from "@chakra-ui/react";
 import ActiveSection from "../components/shared/ActiveSection";
 import TableWithHeading from "../components/shared/TableWithHeading";
 
-const ItemsPage = () => {
+const LoanPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
       <ActiveSection />
-      <TableWithHeading title="My Items" tvariant="simple" />
+      <TableWithHeading title="My Loan" tvariant="simple" />
     </Box>
   );
 };
 
-export default ItemsPage;
+export default LoanPage;

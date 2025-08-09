@@ -13,7 +13,7 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import ShareTable from "./shared/ShareTable";
+import ShareTable from "./ShareTable";
 import {
   MdDeleteOutline,
   MdMoney,
