@@ -7,7 +7,8 @@ import DashboardLayout from "./layout/DashboardLayout";
 import UserDashboard from "./pages/UserDashboard";
 import FellowsPage from "./pages/FellowsPage";
 import ItemsPage from "./pages/ItemsPage";
-import LoanPage from "./pages/ItemsPage copy";
+import SpendingsPage from "./pages/SpendingsPage";
+import LoanPage from "./pages/LoanPage";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="fellows" element={<FellowsPage />} />
           <Route path="items" element={<ItemsPage />} />
           <Route path="Loan" element={<LoanPage />} />
+          <Route path="spendings" element={<SpendingsPage />} />
         </Route>
       </Routes>
     </>
