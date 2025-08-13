@@ -10,6 +10,8 @@ import ItemsPage from "./pages/ItemsPage";
 import SpendingsPage from "./pages/SpendingsPage";
 import LoanPage from "./pages/LoanPage";
 import AddFellowPage from "./pages/AddFellowPage";
+import AddItemPage from "./pages/AddItemPage";
+import AddLoanPage from "./pages/AddLoanPage";
 
 const App = () => {
   return (
@@ -27,9 +29,15 @@ const App = () => {
             <Route index element={<FellowsPage />} />
             <Route path="addFellow" element={<AddFellowPage />} />
           </Route>
+          <Route path="items">
+            <Route index element={<ItemsPage />} />
+            <Route path="addItem" element={<AddItemPage />} />
+          </Route>
+          <Route path="loan">
+            <Route index element={<LoanPage />} />
+            <Route path="addLoan" element={<AddLoanPage />} />
+          </Route>
 
-          <Route path="items" element={<ItemsPage />} />
-          <Route path="Loan" element={<LoanPage />} />
           <Route path="spendings" element={<SpendingsPage />} />
         </Route>
       </Routes>

@@ -21,7 +21,7 @@ import {
   MdOutlineCheckBox,
   MdOutlineEdit,
 } from "react-icons/md";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 interface ISectionProps {
   name: string;
@@ -49,6 +49,9 @@ const Ticket = ({ title, subTitle }: ITicketProps) => {
 const tHeadArray: Array<string> = ["Due Date", "Amount", "Status"];
 
 const ActiveSection = ({ name }: ISectionProps) => {
+  const currentLocation = useLocation();
+  const path = `${currentLocation.pathname}/add${name.toLocaleLowerCase()}`;
+
   return (
     <Box p={3} shadow={"lg"}>
       <Flex mb={2} justify={"space-between"} align={"center"}>
@@ -77,7 +80,7 @@ const ActiveSection = ({ name }: ISectionProps) => {
 
           <Button
             as={RouterLink}
-            to="/user/fellows/addFellow"
+            to={path}
             leftIcon={<MdOutlineAddBox color="green" size={20} />}
             size={"sm"}
           >
