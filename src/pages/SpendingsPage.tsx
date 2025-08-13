@@ -14,6 +14,7 @@ import {
 import { HiOutlineFilter, HiSortDescending } from "react-icons/hi";
 import { MdOutlineSearch } from "react-icons/md";
 import ShareTable from "../components/shared/ShareTable";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 // interface IProps {}
 
@@ -56,13 +57,17 @@ function StatsCard(props: StatsCardProps) {
 }
 
 const SpendingsPage = () => {
+  const currentLocation = useLocation();
+  const path = `${currentLocation.pathname}/addSpending`;
   return (
     <Box ml={{ base: 0, md: 60 }} padding={"4"}>
       <Flex justify={"space-between"} align={"center"}>
         <Heading fontSize={"2xl"} mb={8}>
           Spending Schedule
         </Heading>
-        <Button size={"sm"}>Add New Schedule</Button>
+        <Button as={RouterLink} to={path} size={"sm"}>
+          Add New Schedule
+        </Button>
       </Flex>
       <HStack mb={2} p={2} justifyContent={"space-between"}>
         <Flex gap={2}>
