@@ -5,7 +5,7 @@ import TableWithHeading from "../components/shared/TableWithHeading";
 const LoanPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <ActiveSection />
+      <ActiveSection name="Loan" />
       <TableWithHeading title="My Loan" tvariant="simple" />
     </Box>
   );

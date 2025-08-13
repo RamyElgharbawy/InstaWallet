@@ -14,7 +14,7 @@ const TableWithHeading = ({ title, tvariant }: ITableProps) => {
       <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>
         {title}
       </Text>
-      <ShareTable tvariant={tvariant} theader={tHeadArray} />
+      <ShareTable tvariant={tvariant} theader={tHeadArray} withButton={false} />
     </Flex>
   );
 };

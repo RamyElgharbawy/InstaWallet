@@ -15,7 +15,7 @@ import { HiOutlineFilter, HiSortDescending } from "react-icons/hi";
 import { MdOutlineSearch } from "react-icons/md";
 import ShareTable from "../components/shared/ShareTable";
 
-interface IProps {}
+// interface IProps {}
 
 const spendingTableHeaders: Array<string> = [
   "Name",
@@ -55,7 +55,7 @@ function StatsCard(props: StatsCardProps) {
   );
 }
 
-const SpendingsPage = ({}: IProps) => {
+const SpendingsPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} padding={"4"}>
       <Flex justify={"space-between"} align={"center"}>
@@ -73,7 +73,12 @@ const SpendingsPage = ({}: IProps) => {
           Search
         </Button>
       </HStack>
-      <ShareTable tvariant="striped" theader={spendingTableHeaders} />
+
+      <ShareTable
+        tvariant="striped"
+        theader={spendingTableHeaders}
+        withButton={true}
+      />
 
       <Box pt={5}>
         <Text fontSize={"xl"} fontWeight={"bold"} pb={5}>

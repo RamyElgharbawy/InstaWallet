@@ -11,7 +11,7 @@ import {
   Heading,
   Container,
 } from "@chakra-ui/react";
-import { FcAssistant, FcDonate, FcInTransit } from "react-icons/fc";
+import { FcApproval, FcBusinessman, FcDebt } from "react-icons/fc";
 
 interface FeatureProps {
   title: string;
@@ -61,21 +61,21 @@ export default function HowItWorkPage() {
         px={20}
       >
         <Feature
-          icon={<Icon as={FcAssistant} w={10} h={10} />}
+          icon={<Icon as={FcBusinessman} w={10} h={10} />}
           title={"Create Your Account"}
           text={
             "Sign up with your email or social account, verify your identity, and set up your secure wallet in minutes...."
           }
         />
         <Feature
-          icon={<Icon as={FcDonate} w={10} h={10} />}
+          icon={<Icon as={FcApproval} w={10} h={10} />}
           title={"Connect & Purchase"}
           text={
             "Invite fellows to your network, browse products, and make purchases with flexible installment options."
           }
         />
         <Feature
-          icon={<Icon as={FcInTransit} w={10} h={10} />}
+          icon={<Icon as={FcDebt} w={10} h={10} />}
           title={"Manage & Pay"}
           text={
             "Track your payments, manage loans, and enjoy automatic scheduling while building your financial future."

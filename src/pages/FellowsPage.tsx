@@ -5,7 +5,7 @@ import ActiveSection from "../components/shared/ActiveSection";
 const FellowsPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <ActiveSection />
+      <ActiveSection name="Fellow" />
       <TableWithHeading tvariant="simple" title="My Fellows" />
     </Box>
   );

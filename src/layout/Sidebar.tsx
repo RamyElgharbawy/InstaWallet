@@ -26,12 +26,12 @@ import type { IconType } from "react-icons";
 import Logo from "../components/Logo";
 import ColorModeToggleButton from "../components/ColorModeToggleButton";
 import { Link as RouterLink } from "react-router-dom";
-import { SiShopify } from "react-icons/si";
-import { TbPigMoney } from "react-icons/tb";
+import { SiHomeassistantcommunitystore, SiShopify } from "react-icons/si";
+import { TbPigMoney, TbReportMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
-import { FcMoneyTransfer, FcStatistics } from "react-icons/fc";
 
 interface LinkItemProps {
+  path: string;
   name: string;
   icon: IconType;
 }
@@ -51,11 +51,11 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Statistics", icon: FcStatistics },
-  { name: "Items", icon: SiShopify },
-  { name: "Loan", icon: FcMoneyTransfer },
-  { name: "Fellows", icon: TbPigMoney },
-  { name: "Spendings", icon: FaMoneyBillTransfer },
+  { path: "", name: "Home", icon: SiHomeassistantcommunitystore },
+  { path: "items", name: "Items", icon: SiShopify },
+  { path: "loan", name: "Loan", icon: TbReportMoney },
+  { path: "fellows", name: "Fellows", icon: TbPigMoney },
+  { path: "spendings", name: "Spendings", icon: FaMoneyBillTransfer },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -76,11 +76,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem
-          key={link.name}
-          icon={link.icon}
-          nav={link.name.toLocaleLowerCase()}
-        >
+        <NavItem key={link.name} icon={link.icon} nav={link.path}>
           {link.name}
         </NavItem>
       ))}

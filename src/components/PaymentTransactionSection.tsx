@@ -1,4 +1,6 @@
 import { Card, Grid, Heading, Icon, Text, VStack } from "@chakra-ui/react";
+import { SiCashapp } from "react-icons/si";
+import { TbBrandCashapp } from "react-icons/tb";
 
 // interface IProps{
 
@@ -14,7 +16,7 @@ const TransactionCard = () => {
       justifyContent={"space-between"}
       alignItems={"center"}
     >
-      <Icon fontSize={"xl"} />
+      <SiCashapp color="#69d78f" />
       <Text>Transaction details................</Text>
       <Text>$ Price</Text>
     </Card>

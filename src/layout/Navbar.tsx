@@ -25,7 +25,7 @@ import { HashLink as Link } from "react-router-hash-link";
 // import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose, MdOutlineWbSunny } from "react-icons/md";
-import { FaMoon } from "react-icons/fa";
+import { FaRegMoon } from "react-icons/fa";
 import { TbLogin2 } from "react-icons/tb";
 import Logo from "../components/Logo";
 import {} from "react-router-hash-link";
@@ -128,7 +128,9 @@ export default function Navbar() {
               </MenuButton>
               <MenuList>
                 <MenuItem>User Profile</MenuItem>
-                <MenuItem>Dashboard</MenuItem>
+                <MenuItem as={RouterLink} to={"/user"}>
+                  Dashboard
+                </MenuItem>
                 <MenuDivider />
                 <MenuItem>Logout</MenuItem>
               </MenuList>
@@ -141,7 +143,7 @@ export default function Navbar() {
                 display={{ base: "none", md: "flex" }}
                 onClick={toggleColorMode}
               >
-                {colorMode === "light" ? <FaMoon /> : <MdOutlineWbSunny />}
+                {colorMode === "light" ? <FaRegMoon /> : <MdOutlineWbSunny />}
               </Button>
             </Stack>
           </Flex>

@@ -21,10 +21,11 @@ import {
   MdOutlineCheckBox,
   MdOutlineEdit,
 } from "react-icons/md";
+import { Link as RouterLink } from "react-router-dom";
 
-// interface IActiveSectionProps {
-//   name: string;
-// }
+interface ISectionProps {
+  name: string;
+}
 interface ITicketProps {
   title: string;
   subTitle: string;
@@ -47,12 +48,12 @@ const Ticket = ({ title, subTitle }: ITicketProps) => {
 // shares table header
 const tHeadArray: Array<string> = ["Due Date", "Amount", "Status"];
 
-const ActiveSection = () => {
+const ActiveSection = ({ name }: ISectionProps) => {
   return (
     <Box p={3} shadow={"lg"}>
       <Flex mb={2} justify={"space-between"} align={"center"}>
         <Text fontSize={"2xl"} fontWeight={"semibold"}>
-          Fellow Name
+          {name} Name
         </Text>
         <HStack>
           <Menu>
@@ -75,10 +76,12 @@ const ActiveSection = () => {
           </Menu>
 
           <Button
+            as={RouterLink}
+            to="/user/fellows/addFellow"
             leftIcon={<MdOutlineAddBox color="green" size={20} />}
             size={"sm"}
           >
-            Add New
+            Add New {name}
           </Button>
         </HStack>
       </Flex>
@@ -99,7 +102,11 @@ const ActiveSection = () => {
         <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>
           Shares Breakdown
         </Text>
-        <ShareTable tvariant="striped" theader={tHeadArray} />
+        <ShareTable
+          withButton={false}
+          tvariant="striped"
+          theader={tHeadArray}
+        />
       </Flex>
     </Box>
   );

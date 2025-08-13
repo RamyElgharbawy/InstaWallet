@@ -5,7 +5,7 @@ import TableWithHeading from "../components/shared/TableWithHeading";
 const ItemsPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <ActiveSection />
+      <ActiveSection name="Item" />
       <TableWithHeading title="My Items" tvariant="simple" />
     </Box>
   );

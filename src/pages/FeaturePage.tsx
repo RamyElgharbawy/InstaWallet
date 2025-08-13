@@ -13,11 +13,11 @@ import {
 } from "@chakra-ui/react";
 import type { ReactElement } from "react";
 import {
-  FcAbout,
-  FcAssistant,
+  FcConferenceCall,
   FcCollaboration,
-  FcDonate,
-  FcManager,
+  FcDataSheet,
+  FcComboChart,
+  FcCurrencyExchange,
 } from "react-icons/fc";
 
 interface CardProps {
@@ -80,7 +80,7 @@ export default function FeaturePage() {
         <Flex flexWrap="wrap" gridGap={6} justify={"Center"}>
           <Card
             heading={"Fellows Management"}
-            icon={<Icon as={FcAssistant} w={10} h={10} />}
+            icon={<Icon as={FcConferenceCall} w={10} h={10} />}
             description={
               "Manage Your Fellow starts, ends, shares paid and remaining."
             }
@@ -96,7 +96,7 @@ export default function FeaturePage() {
           />
           <Card
             heading={"Scheduled Spending"}
-            icon={<Icon as={FcDonate} w={10} h={10} />}
+            icon={<Icon as={FcDataSheet} w={10} h={10} />}
             description={
               "Plan your expenses in advance, set up automatic payments, and maintain perfect budget control."
             }
@@ -104,7 +104,7 @@ export default function FeaturePage() {
           />
           <Card
             heading={"Purchase Management"}
-            icon={<Icon as={FcManager} w={10} h={10} />}
+            icon={<Icon as={FcCurrencyExchange} w={10} h={10} />}
             description={
               "Track all your purchases in one place, monitor installment progress, and never miss a payment deadline."
             }
@@ -112,7 +112,7 @@ export default function FeaturePage() {
           />
           <Card
             heading={"Financial Insights"}
-            icon={<Icon as={FcAbout} w={10} h={10} />}
+            icon={<Icon as={FcComboChart} w={10} h={10} />}
             description={
               "Get detailed analytics on your spending patterns, payment history, and financial health with smart recommendations."
             }

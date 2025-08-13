@@ -1,6 +1,5 @@
 import { Button, useColorMode } from "@chakra-ui/react";
-import { MdDarkMode, MdOutlineWbSunny } from "react-icons/md";
-
+import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 const ColorModeToggleButton = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -13,9 +12,9 @@ const ColorModeToggleButton = () => {
         onClick={toggleColorMode}
       >
         {colorMode === "light" ? (
-          <MdDarkMode size={20} />
+          <IoMoonOutline size={20} />
         ) : (
-          <MdOutlineWbSunny />
+          <IoSunnyOutline />
         )}
       </Button>
     </>
