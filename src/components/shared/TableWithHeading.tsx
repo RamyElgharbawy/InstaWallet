@@ -4,17 +4,26 @@ import ShareTable from "./ShareTable";
 interface ITableProps {
   title: string;
   tvariant: string;
+  theader: Array<string>;
+  withButton: boolean;
 }
 
-const tHeadArray = ["Title", "Amount", "Start Date", "Status"];
-
-const TableWithHeading = ({ title, tvariant }: ITableProps) => {
+const TableWithHeading = ({
+  title,
+  tvariant,
+  theader,
+  withButton,
+}: ITableProps) => {
   return (
-    <Flex flexDirection={"column"} gap={2} my={5} shadow={"2xl"} p={3}>
+    <Flex flexDirection={"column"} gap={2} my={5}>
       <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>
         {title}
       </Text>
-      <ShareTable tvariant={tvariant} theader={tHeadArray} withButton={false} />
+      <ShareTable
+        tvariant={tvariant}
+        theader={theader}
+        withButton={withButton}
+      />
     </Flex>
   );
 };

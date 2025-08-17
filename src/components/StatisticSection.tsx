@@ -11,7 +11,8 @@ import {
 } from "@chakra-ui/react";
 
 import type { IconType } from "react-icons";
-import { TbMoneybag } from "react-icons/tb";
+import { SiShopify } from "react-icons/si";
+import { TbMoneybag, TbPigMoney, TbReportMoney } from "react-icons/tb";
 
 interface ICardProps {
   cardTitle: string;
@@ -34,7 +35,7 @@ const StatisticCard = ({
         alignItems={"center"}
       >
         <Heading size="md"> {cardTitle}</Heading>
-        <Icon fontSize="30" as={cardIcon} />
+        <Icon fontSize="23" as={cardIcon} color={"green.500"} />
       </CardHeader>
       <CardBody>
         <Text>{cardBody}</Text>
@@ -52,25 +53,25 @@ const statsArray: Array<ICardProps> = [
     cardTitle: "Wallet Balance",
     cardIcon: TbMoneybag,
     cardBody: "202054 $",
-    cardStats: "jbedhveye",
+    cardStats: "Total Balance",
   },
   {
     cardTitle: "Active Loans",
-    cardIcon: TbMoneybag,
+    cardIcon: TbReportMoney,
     cardBody: "202054 $",
-    cardStats: "jbedhveye",
+    cardStats: "Solfa",
   },
   {
     cardTitle: "Active Fellows",
-    cardIcon: TbMoneybag,
+    cardIcon: TbPigMoney,
     cardBody: "202054 $",
-    cardStats: "jbedhveye",
+    cardStats: "Hassan Fellow",
   },
   {
     cardTitle: "Active Installments",
-    cardIcon: TbMoneybag,
+    cardIcon: SiShopify,
     cardBody: "202054 $",
-    cardStats: "jbedhveye",
+    cardStats: "IPhone 16",
   },
 ];
 

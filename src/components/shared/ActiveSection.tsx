@@ -22,6 +22,7 @@ import {
   MdOutlineEdit,
 } from "react-icons/md";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import TableWithHeading from "./TableWithHeading";
 
 interface ISectionProps {
   name: string;
@@ -46,19 +47,28 @@ const Ticket = ({ title, subTitle }: ITicketProps) => {
 };
 
 // shares table header
-const tHeadArray: Array<string> = ["Due Date", "Amount", "Status"];
+const tHeadArray = [
+  "Due Date",
+  "Schedule",
+  "Start Date",
+  "End Date",
+  "Amount",
+  "Status",
+  "Actions",
+];
 
 const ActiveSection = ({ name }: ISectionProps) => {
   const currentLocation = useLocation();
-  const path = `${currentLocation.pathname}/add${name.toLocaleLowerCase()}`;
+  const path = `${currentLocation.pathname}/add${name}`;
 
   return (
-    <Box p={3} shadow={"lg"}>
+    <Box p={0}>
       <Flex mb={2} justify={"space-between"} align={"center"}>
         <Text fontSize={"2xl"} fontWeight={"semibold"}>
           {name} Name
         </Text>
         <HStack>
+          {/* Edit Button Menu */}
           <Menu>
             <MenuButton
               as={Button}
@@ -68,7 +78,13 @@ const ActiveSection = ({ name }: ISectionProps) => {
               Edit
             </MenuButton>
             <MenuList>
-              <MenuItem icon={<MdOutlineEdit size={17} />}>Edit</MenuItem>
+              <MenuItem
+                as={RouterLink}
+                to={"/user/edit"}
+                icon={<MdOutlineEdit size={17} />}
+              >
+                Edit
+              </MenuItem>
               <MenuItem icon={<MdMoney size={17} />}>Pay Next Share</MenuItem>
               <MenuItem icon={<MdOutlineCheckBox size={17} />}>
                 Mark As Complete
@@ -101,16 +117,12 @@ const ActiveSection = ({ name }: ISectionProps) => {
         <Ticket subTitle="Next Share Date" title="01/09/2025" />
       </SimpleGrid>
 
-      <Flex flexDirection={"column"} gap={2}>
-        <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>
-          Shares Breakdown
-        </Text>
-        <ShareTable
-          withButton={false}
-          tvariant="striped"
-          theader={tHeadArray}
-        />
-      </Flex>
+      <TableWithHeading
+        title="Shares Breakdown"
+        tvariant="striped"
+        theader={tHeadArray}
+        withButton={false}
+      />
     </Box>
   );
 };

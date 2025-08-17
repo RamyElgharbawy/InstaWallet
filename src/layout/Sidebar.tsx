@@ -25,7 +25,7 @@ import { FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import Logo from "../components/Logo";
 import ColorModeToggleButton from "../components/ColorModeToggleButton";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 import { SiHomeassistantcommunitystore, SiShopify } from "react-icons/si";
 import { TbPigMoney, TbReportMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
@@ -91,6 +91,7 @@ const NavItem = ({ icon, children, nav, ...rest }: NavItemProps) => {
       to={nav}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
+      end
     >
       <Flex
         align="center"
@@ -108,7 +109,8 @@ const NavItem = ({ icon, children, nav, ...rest }: NavItemProps) => {
         {icon && (
           <Icon
             mr="4"
-            fontSize="16"
+            color={"green.500"}
+            fontSize="23"
             _groupHover={{
               color: "white",
             }}
@@ -239,8 +241,3 @@ const Asidebar = () => {
 };
 
 export default Asidebar;
-
-// <Box ml={{ base: 0, md: 60 }} p="4">
-//   {/* Content Here...................... */}
-//   <Text>Content Here......................</Text>
-// </Box>

@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   HStack,
   SimpleGrid,
   Stat,
@@ -60,11 +59,11 @@ const SpendingsPage = () => {
   const currentLocation = useLocation();
   const path = `${currentLocation.pathname}/addSpending`;
   return (
-    <Box ml={{ base: 0, md: 60 }} padding={"4"}>
+    <Box ml={{ base: 0, md: 60 }} p={4}>
       <Flex justify={"space-between"} align={"center"}>
-        <Heading fontSize={"2xl"} mb={8}>
+        <Text fontSize={"2xl"} fontWeight={"semibold"} mb={8}>
           Spending Schedule
-        </Heading>
+        </Text>
         <Button as={RouterLink} to={path} size={"sm"}>
           Add New Schedule
         </Button>

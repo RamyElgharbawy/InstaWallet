@@ -1,29 +1,48 @@
-import { Box, Button, Flex, Icon, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, Icon, SimpleGrid, Text } from "@chakra-ui/react";
 import type { IconType } from "react-icons";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { SiShopify } from "react-icons/si";
 import { TbPigMoney } from "react-icons/tb";
+import { Link as RouterLink } from "react-router-dom";
 
 interface IAButtonProps {
   icon: IconType;
   title: string;
+  path: string;
 }
 
-const ActionButton = ({ icon, title }: IAButtonProps) => {
+const ActionButton = ({ icon, title, path }: IAButtonProps) => {
   return (
-    <Button display={"flex"} flexWrap={"wrap"} h={"28"} colorScheme="green">
+    <Button
+      as={RouterLink}
+      to={path}
+      display={"flex"}
+      flexWrap={"wrap"}
+      h={"28"}
+      colorScheme="green"
+    >
       <Icon fontSize={"4xl"} as={icon} w={"100%"} />
-      <Text w={"full"}>{title}</Text>
+      <Text textAlign={"center"} w={"full"}>
+        {title}
+      </Text>
     </Button>
   );
 };
 
 const buttonArray: Array<IAButtonProps> = [
-  { icon: SiShopify, title: "Add New Item" },
-  { icon: FcMoneyTransfer, title: "Add New Loan" },
-  { icon: TbPigMoney, title: "Add New Fellow" },
-  { icon: FaMoneyBillTransfer, title: "Add New Spending" },
+  { icon: SiShopify, title: "Add New Item", path: "/user/items/addItem" },
+  { icon: FcMoneyTransfer, title: "Add New Loan", path: "/user/loan/addLoan" },
+  {
+    icon: TbPigMoney,
+    title: "Add New Fellow",
+    path: "/user/fellows/addFellow",
+  },
+  {
+    icon: FaMoneyBillTransfer,
+    title: "Add New Spending",
+    path: "/user/spendings/addSpending",
+  },
 ];
 
 const QuickActionSection = () => {

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import TableWithHeading from "../components/shared/TableWithHeading";
-import ActiveSection from "../components/shared/ActiveSection";
+import ItemDetails from "../components/ItemDetails";
 
 // shares table header
 const tHeadArray = [
@@ -10,20 +10,26 @@ const tHeadArray = [
   "End Date",
   "Amount",
   "Status",
-  "Actions",
 ];
-const FellowsPage = () => {
+
+const ItemDetailsPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p={4}>
-      <ActiveSection name="Fellow" />
+      <ItemDetails />
       <TableWithHeading
+        title="Shares Breakdown"
+        tvariant="simple"
         theader={tHeadArray}
         withButton={false}
-        tvariant="simple"
-        title="My Fellows"
+      />
+      <TableWithHeading
+        title="Remaining Shares"
+        tvariant="striped"
+        theader={tHeadArray}
+        withButton={true}
       />
     </Box>
   );
 };
 
-export default FellowsPage;
+export default ItemDetailsPage;
