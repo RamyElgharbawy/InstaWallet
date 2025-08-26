@@ -21,7 +21,7 @@ const LoanPage = () => {
         title="My Loan"
         tvariant="simple"
         theader={tHeadArray}
-        withButton={false}
+        withButton={true}
       />
     </Box>
   );

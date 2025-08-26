@@ -14,6 +14,9 @@ import AddItemPage from "./pages/AddItemPage";
 import AddLoanPage from "./pages/AddLoanPage";
 import AddSpendingPage from "./pages/AddSpendingPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import LoanDetailsPage from "./pages/LoanDetailsPage";
+import FellowDetailsPage from "./pages/FellowDetailsPage";
 
 const App = () => {
   return (
@@ -29,21 +32,27 @@ const App = () => {
         <Route path="/user" element={<DashboardLayout />}>
           <Route index element={<UserDashboard />} />
           <Route path="statistics" element={<UserDashboard />} />
-          <Route path="edit" element={<ItemDetailsPage />} />
+          <Route path="profile" element={<UserProfilePage />} />
           {/* User Fellows Route */}
           <Route path="fellows">
             <Route index element={<FellowsPage />} />
             <Route path="addFellow" element={<AddFellowPage />} />
+            <Route path="editFellow" element={<AddFellowPage />} />
+            <Route path="details" element={<FellowDetailsPage />} />
           </Route>
           {/* User Items Route */}
           <Route path="items">
             <Route index element={<ItemsPage />} />
             <Route path="addItem" element={<AddItemPage />} />
+            <Route path="editItem" element={<AddItemPage />} />
+            <Route path="details" element={<ItemDetailsPage />} />
           </Route>
           {/* User Loans Route */}
           <Route path="loan">
             <Route index element={<LoanPage />} />
             <Route path="addLoan" element={<AddLoanPage />} />
+            <Route path="editLoan" element={<AddLoanPage />} />
+            <Route path="details" element={<LoanDetailsPage />} />
           </Route>
           {/* User Spendings Route */}
           <Route path="spendings">

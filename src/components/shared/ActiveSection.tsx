@@ -80,7 +80,7 @@ const ActiveSection = ({ name }: ISectionProps) => {
             <MenuList>
               <MenuItem
                 as={RouterLink}
-                to={"/user/edit"}
+                to={"/user/details"}
                 icon={<MdOutlineEdit size={17} />}
               >
                 Edit

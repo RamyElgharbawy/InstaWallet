@@ -18,7 +18,7 @@ const FellowsPage = () => {
       <ActiveSection name="Fellow" />
       <TableWithHeading
         theader={tHeadArray}
-        withButton={false}
+        withButton={true}
         tvariant="simple"
         title="My Fellows"
       />

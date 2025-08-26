@@ -5,11 +5,6 @@ import * as Yup from "yup";
 
 // Form Field
 const loanFields = [
-  // {
-  //   name: "type",
-  //   label: "Item Type",
-  //   placeholder: "purchaseItem or loan",
-  // },
   {
     name: "title",
     label: "Title",

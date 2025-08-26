@@ -9,6 +9,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 interface ITableProps {
   tvariant: string;
@@ -66,6 +67,8 @@ const ShareTable = ({ tvariant, theader, withButton }: ITableProps) => {
                 {withButton ? (
                   <Td>
                     <IconButton
+                      as={Link}
+                      to={"/user/edit"}
                       aria-label="Edit Record"
                       icon={<FiEdit size={17} />}
                       size="xs"

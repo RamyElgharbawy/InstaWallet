@@ -20,7 +20,7 @@ const ItemsPage = () => {
         title="My Items"
         tvariant="simple"
         theader={tHeadArray}
-        withButton={false}
+        withButton={true}
       />
     </Box>
   );
