@@ -5,18 +5,18 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DashboardLayout from "./layout/DashboardLayout";
 import UserDashboard from "./pages/UserDashboard";
-import FellowsPage from "./pages/FellowsPage";
-import ItemsPage from "./pages/ItemsPage";
-import SpendingsPage from "./pages/SpendingsPage";
-import LoanPage from "./pages/LoanPage";
-import AddFellowPage from "./pages/AddFellowPage";
-import AddItemPage from "./pages/AddItemPage";
-import AddLoanPage from "./pages/AddLoanPage";
-import AddSpendingPage from "./pages/AddSpendingPage";
-import ItemDetailsPage from "./pages/ItemDetailsPage";
+import FellowsPage from "./pages/Fellows/FellowsPage";
+import ItemsPage from "./pages/Items/ItemsPage";
+import SpendingsPage from "./pages/Spending/SpendingsPage";
+import LoanPage from "./pages/Loan/LoanPage";
+import AddFellowPage from "./pages/Fellows/AddFellowPage";
+import AddItemPage from "./pages/Items/AddItemPage";
+import AddLoanPage from "./pages/Loan/AddLoanPage";
+import AddSpendingPage from "./pages/Spending/AddSpendingPage";
+import ItemDetailsPage from "./pages/Items/ItemDetailsPage";
 import UserProfilePage from "./pages/UserProfilePage";
-import LoanDetailsPage from "./pages/LoanDetailsPage";
-import FellowDetailsPage from "./pages/FellowDetailsPage";
+import LoanDetailsPage from "./pages/Loan/LoanDetailsPage";
+import FellowDetailsPage from "./pages/Fellows/FellowDetailsPage";
 
 const App = () => {
   return (

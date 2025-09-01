@@ -1,41 +1,43 @@
 import { Flex, VStack, Text, Card } from "@chakra-ui/react";
+import type { IItem } from "../interfaces";
+import { formatDate } from "../utils/dateFormat";
 
-const ItemDetails = () => {
+const ItemDetails = (itemData: IItem) => {
   return (
     <>
       <Card>
         <VStack p={3} align={"flex-start"}>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}>Title :</Text>
-            <Text>Item title</Text>
+            <Text>{itemData.title}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}>Price :</Text>
-            <Text>5000</Text>
+            <Text>{itemData.price}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}>Purchase Date :</Text>
-            <Text>15/12/2023</Text>
+            <Text>{formatDate(itemData.purchaseDate)}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}>Number Of Months :</Text>
-            <Text>10</Text>
+            <Text>{itemData.numberOfMonths}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}> Monthly Amount :</Text>
-            <Text>500</Text>
+            <Text>{itemData.monthlyAmount}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}> start Date :</Text>
-            <Text>01/01/2024</Text>
+            <Text>{formatDate(itemData.startIn)}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}> End Date :</Text>
-            <Text>02/10/2024</Text>
+            <Text>{formatDate(itemData.endIn)}</Text>
           </Flex>
           <Flex align={"center"} gap={2}>
             <Text fontWeight={"semibold"}> Status :</Text>
-            <Text>Completed</Text>
+            <Text>{itemData.status}</Text>
           </Flex>
         </VStack>
       </Card>

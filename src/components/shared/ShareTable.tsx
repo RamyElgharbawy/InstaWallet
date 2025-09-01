@@ -10,60 +10,39 @@ import {
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import type { IShare } from "../../interfaces";
+import { formatDate } from "../../utils/dateFormat";
 
 interface ITableProps {
   tvariant: string;
-  theader: Array<string>;
   withButton: boolean;
+  tableData: IShare[];
 }
-const tableData = [
-  {
-    name: "Name",
-    period: "monthly",
-    startDate: "01/05/2025",
-    dueDate: "01/06/2025",
-    amount: "3000",
-    status: "remaining",
-  },
-  {
-    name: "Name",
-    period: "monthly",
-    startDate: "01/05/2025",
-    dueDate: "01/06/2025",
-    amount: "3000",
-    status: "remaining",
-  },
-  {
-    name: "Name",
-    period: "monthly",
-    startDate: "01/05/2025",
-    dueDate: "01/06/2025",
-    amount: "3000",
-    status: "remaining",
-  },
-];
-const ShareTable = ({ tvariant, theader, withButton }: ITableProps) => {
+
+// shares table header
+const theader = ["Due Date", "Amount", "PayStatus"];
+
+const ShareTable = ({ tvariant, withButton, tableData }: ITableProps) => {
   return (
     <TableContainer border={"1px"} rounded={"md"}>
       <Table variant={tvariant} colorScheme="green" size={"sm"}>
-        {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
         <Thead>
           <Tr>
             {theader.map((header, indx) => {
               return <Th key={indx}>{header}</Th>;
             })}
+            {withButton ? <Th>Action</Th> : null}
           </Tr>
         </Thead>
         <Tbody>
-          {tableData.map((item, indx) => {
+          {tableData?.map((item, indx) => {
             return (
               <Tr key={indx}>
-                <Td>{item.name}</Td>
-                <Td>{item.period}</Td>
-                <Td>{item.startDate}</Td>
-                <Td>{item.dueDate}</Td>
+                <Td>{item.dueDate ? formatDate(item.dueDate) : ""}</Td>
                 <Td>{item.amount}</Td>
-                <Td>{item.status}</Td>
+                <Td>{item.payDate ? formatDate(item.payDate) : "_"}</Td>
+
+                {/* Action Button */}
                 {withButton ? (
                   <Td>
                     <IconButton
@@ -82,13 +61,6 @@ const ShareTable = ({ tvariant, theader, withButton }: ITableProps) => {
             );
           })}
         </Tbody>
-        {/* <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th>multiply by</Th>
-          </Tr>
-        </Tfoot> */}
       </Table>
     </TableContainer>
   );

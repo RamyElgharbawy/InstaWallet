@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import TableWithHeading from "../components/shared/TableWithHeading";
-import ActiveSection from "../components/shared/ActiveSection";
+import TableWithHeading from "../../components/shared/TableWithHeading";
+import ActiveSection from "../../components/shared/ActiveSection";
 
 // shares table header
 const tHeadArray = [

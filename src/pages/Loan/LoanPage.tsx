@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import ActiveSection from "../components/shared/ActiveSection";
-import TableWithHeading from "../components/shared/TableWithHeading";
+import ActiveSection from "../../components/shared/ActiveSection";
+import TableWithHeading from "../../components/shared/TableWithHeading";
 
 // shares table header
 const tHeadArray = [
@@ -12,12 +12,13 @@ const tHeadArray = [
   "Status",
   "Actions",
 ];
-const ItemsPage = () => {
+
+const LoanPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <ActiveSection name="Item" />
+      <ActiveSection name="Loan" />
       <TableWithHeading
-        title="My Items"
+        title="My Loan"
         tvariant="simple"
         theader={tHeadArray}
         withButton={true}
@@ -26,4 +27,4 @@ const ItemsPage = () => {
   );
 };
 
-export default ItemsPage;
+export default LoanPage;

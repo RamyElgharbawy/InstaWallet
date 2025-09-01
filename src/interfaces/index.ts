@@ -1,7 +1,7 @@
 export interface IShare {
   amount: number;
-  dueDate: Date;
-  payDate: Date;
+  dueDate: string;
+  payDate: string;
   payStatus: boolean;
   fellowId: string;
   itemId: string;
@@ -11,11 +11,11 @@ export interface IItem {
   type: string;
   title: string;
   price: number;
-  purchaseDate: Date;
+  purchaseDate: string;
   numberOfMonths: number;
   monthlyAmount: number;
-  startIn: Date;
-  endIn: Date;
+  startIn: string;
+  endIn: string;
   shares: IShare[];
   status: string;
   notes: string;
@@ -27,8 +27,8 @@ export interface IFellow {
   amount: number;
   numberOfMonths: number;
   turnMonth: number;
-  startIn: Date;
-  endIn: Date;
+  startIn: string;
+  endIn: string;
   shares: IShare[];
   status: string;
   userId: string;
@@ -38,7 +38,7 @@ export interface ISpending {
   name: string;
   amount: number;
   schedule: string;
-  startIn: Date;
+  startIn: string;
   status: string;
   userId: string;
 }

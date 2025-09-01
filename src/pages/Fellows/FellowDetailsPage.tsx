@@ -1,5 +1,5 @@
 import { Box, Flex, VStack, Text, Card } from "@chakra-ui/react";
-import TableWithHeading from "../components/shared/TableWithHeading";
+import TableWithHeading from "../../components/shared/TableWithHeading";
 
 // shares table header
 const tHeadArray = [

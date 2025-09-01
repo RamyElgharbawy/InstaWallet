@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { HiOutlineFilter, HiSortDescending } from "react-icons/hi";
 import { MdOutlineSearch } from "react-icons/md";
-import ShareTable from "../components/shared/ShareTable";
+import ShareTable from "../../components/shared/ShareTable";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
 // interface IProps {}

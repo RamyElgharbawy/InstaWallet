@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import TableWithHeading from "../components/shared/TableWithHeading";
-import ItemDetails from "../components/ItemDetails";
+import TableWithHeading from "../../components/shared/TableWithHeading";
+import ItemDetails from "../../components/ItemDetails";
 
 // shares table header
 const tHeadArray = [
@@ -12,10 +12,13 @@ const tHeadArray = [
   "Status",
 ];
 
-const ItemDetailsPage = () => {
+const LoanDetailsPage = () => {
   return (
     <Box ml={{ base: 0, md: 60 }} p={4}>
+      {/* Fellow Details */}
       <ItemDetails />
+
+      {/* Shares Tables */}
 
       <TableWithHeading
         title="Shares Breakdown"
@@ -23,7 +26,6 @@ const ItemDetailsPage = () => {
         theader={tHeadArray}
         withButton={false}
       />
-
       <TableWithHeading
         title="Remaining Shares"
         tvariant="striped"
@@ -34,4 +36,4 @@ const ItemDetailsPage = () => {
   );
 };
 
-export default ItemDetailsPage;
+export default LoanDetailsPage;

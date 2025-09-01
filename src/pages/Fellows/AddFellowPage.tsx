@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "@chakra-ui/react";
-import { AppForm } from "../components/shared/AppForm";
+import { AppForm } from "../../components/shared/AppForm";
 import * as Yup from "yup";
 
 // Form Field
