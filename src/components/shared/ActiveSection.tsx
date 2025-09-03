@@ -13,7 +13,7 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import ShareTable from "./ShareTable";
+
 import {
   MdDeleteOutline,
   MdMoney,
@@ -22,10 +22,11 @@ import {
   MdOutlineEdit,
 } from "react-icons/md";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import TableWithHeading from "./TableWithHeading";
+import type { IItem } from "../../interfaces";
 
 interface ISectionProps {
   name: string;
+  data: IItem[];
 }
 interface ITicketProps {
   title: string;
@@ -46,26 +47,18 @@ const Ticket = ({ title, subTitle }: ITicketProps) => {
   );
 };
 
-// shares table header
-const tHeadArray = [
-  "Due Date",
-  "Schedule",
-  "Start Date",
-  "End Date",
-  "Amount",
-  "Status",
-  "Actions",
-];
-
-const ActiveSection = ({ name }: ISectionProps) => {
+const ActiveSection = ({ name, data }: ISectionProps) => {
+  // get current location
   const currentLocation = useLocation();
   const path = `${currentLocation.pathname}/add${name}`;
+  // // active cards data
+  // const activeCards = data?.data || [];
 
   return (
     <Box p={0}>
       <Flex mb={2} justify={"space-between"} align={"center"}>
         <Text fontSize={"2xl"} fontWeight={"semibold"}>
-          {name} Name
+          Active {name}s
         </Text>
         <HStack>
           {/* Edit Button Menu */}
@@ -93,7 +86,7 @@ const ActiveSection = ({ name }: ISectionProps) => {
               <MenuItem icon={<MdDeleteOutline size={17} />}>Delete</MenuItem>
             </MenuList>
           </Menu>
-
+          {/* Add New Button */}
           <Button
             as={RouterLink}
             to={path}
@@ -104,25 +97,27 @@ const ActiveSection = ({ name }: ISectionProps) => {
           </Button>
         </HStack>
       </Flex>
-      <Text fontSize={"sm"}>Active</Text>
 
+      {/* Active Cards */}
       <SimpleGrid
         my={4}
         spacing={4}
         templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
       >
-        <Ticket subTitle="Total Shares" title="10" />
-        <Ticket subTitle="Start Date" title="01/07/8/2025" />
-        <Ticket subTitle="End Date" title="01/06/2026" />
-        <Ticket subTitle="Next Share Date" title="01/09/2025" />
+        {data.length > 0 ? (
+          data.map((card) => {
+            return (
+              <Ticket
+                key={card.id}
+                subTitle={card.title || card.manager}
+                title={card.price || card.amount}
+              />
+            );
+          })
+        ) : (
+          <Text>No data available</Text>
+        )}
       </SimpleGrid>
-
-      <TableWithHeading
-        title="Shares Breakdown"
-        tvariant="striped"
-        theader={tHeadArray}
-        withButton={false}
-      />
     </Box>
   );
 };
