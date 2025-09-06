@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   Button,
@@ -22,11 +23,10 @@ import {
   MdOutlineEdit,
 } from "react-icons/md";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import type { IItem } from "../../interfaces";
 
 interface ISectionProps {
   name: string;
-  data: IItem[];
+  data: any[];
 }
 interface ITicketProps {
   title: string;

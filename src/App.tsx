@@ -22,11 +22,11 @@ const App = () => {
   return (
     <>
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         {/* App Layout */}
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
         </Route>
         {/* User Dashboard Layout*/}
         <Route path="/user" element={<DashboardLayout />}>

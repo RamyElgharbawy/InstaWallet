@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const DashboardLayout = () => {
   return (
     <>
-      <Sidebar />
-      <Outlet />
+      <ProtectedRoute>
+        <Sidebar />
+        <Outlet />
+      </ProtectedRoute>
     </>
   );
 };

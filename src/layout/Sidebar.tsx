@@ -29,6 +29,8 @@ import { NavLink as RouterLink } from "react-router-dom";
 import { SiHomeassistantcommunitystore, SiShopify } from "react-icons/si";
 import { TbPigMoney, TbReportMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
+import { useCookies } from "react-cookie";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface LinkItemProps {
   path: string;
@@ -124,6 +126,20 @@ const NavItem = ({ icon, children, nav, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const queryClient = useQueryClient();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cookies, removeCookie] = useCookies(["jwt"]);
+
+  const logout = () => {
+    removeCookie("jwt", { path: "/" });
+    // manually remove cookie
+    document.cookie =
+      "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=; secure=false;";
+
+    queryClient.clear();
+    window.location.href = "/";
+  };
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -205,7 +221,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={logout}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

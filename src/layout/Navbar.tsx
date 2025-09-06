@@ -29,6 +29,7 @@ import { FaRegMoon } from "react-icons/fa";
 import { TbLogin2 } from "react-icons/tb";
 import Logo from "../components/Logo";
 import {} from "react-router-hash-link";
+import { useCookies } from "react-cookie";
 
 interface Props {
   children: React.ReactNode;
@@ -59,6 +60,9 @@ const NavLink = (props: Props) => {
 };
 
 export default function Navbar() {
+  // cookie hook
+  const [cookies] = useCookies(["jwt"]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -94,47 +98,50 @@ export default function Navbar() {
           </HStack>
           {/* Right Section [userDropDown Menu, Theme Mode]  */}
           <Flex alignItems={"center"} gap={3}>
-            {/* Login  */}
-            <Text
-              as={RouterLink}
-              to={"/login"}
-              display={{ md: "flex", base: "none" }}
-              mr={2}
-              p={2}
-              rounded={10}
-              alignItems={"center"}
-              gap={1}
-              bgColor={"green.500"}
-              _hover={{ bgColor: "green.400" }}
-            >
-              Login
-              {<TbLogin2 size={20} />}
-            </Text>
-            {/* User Profile */}
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
+            {/* Login && User Profile  */}
+            {cookies.jwt ? (
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
+                  minW={0}
+                >
+                  <Avatar
+                    size={"sm"}
+                    src={
+                      "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                    }
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>User Profile</MenuItem>
+                  <MenuItem as={RouterLink} to={"/user"}>
+                    Dashboard
+                  </MenuItem>
+                  <MenuDivider />
+                  <MenuItem>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <Text
+                as={RouterLink}
+                to={"/login"}
+                display={{ md: "flex", base: "none" }}
+                mr={2}
+                p={2}
+                rounded={10}
+                alignItems={"center"}
+                gap={1}
+                bgColor={"green.500"}
+                _hover={{ bgColor: "green.400" }}
               >
-                <Avatar
-                  size={"sm"}
-                  src={
-                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>User Profile</MenuItem>
-                <MenuItem as={RouterLink} to={"/user"}>
-                  Dashboard
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem>Logout</MenuItem>
-              </MenuList>
-            </Menu>
+                Login
+                {<TbLogin2 size={20} />}
+              </Text>
+            )}
+
             {/* Theme Mode  */}
             <Stack direction={"row"} spacing={7}>
               <Button
