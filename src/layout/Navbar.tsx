@@ -30,6 +30,7 @@ import { TbLogin2 } from "react-icons/tb";
 import Logo from "../components/Logo";
 import {} from "react-router-hash-link";
 import { useCookies } from "react-cookie";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   children: React.ReactNode;
@@ -60,11 +61,23 @@ const NavLink = (props: Props) => {
 };
 
 export default function Navbar() {
+  const queryClient = useQueryClient();
   // cookie hook
-  const [cookies] = useCookies(["jwt"]);
+  const [cookies, removeCookie] = useCookies(["jwt"]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+
+  // logout function
+  const logout = () => {
+    removeCookie("jwt", { path: "/" });
+    // manually remove cookie
+    document.cookie =
+      "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=; secure=false;";
+
+    queryClient.clear();
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -121,7 +134,7 @@ export default function Navbar() {
                     Dashboard
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem>Logout</MenuItem>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
               </Menu>
             ) : (

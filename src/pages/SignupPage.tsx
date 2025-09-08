@@ -7,41 +7,43 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
   Stack,
   Button,
   Heading,
   Text,
   useColorModeValue,
-  FormHelperText,
+  Alert,
+  AlertDescription,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAuth } from "../hooks/auth/authHook";
 
 export default function SignupPage() {
-  const [user, setUser] = useState({ email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
-  //   const [isEmail, setIsEmail] = useState(false);
-  //   const [isPassword, setIsPassword] = useState(false);
+  // auth-hook for signup mutations
+  const { signup, isSigningUp, signupError, signupIsError } = useAuth();
 
-  const onChangeHandler = (e) => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
-    // if (!user.email && !user.password) {
-    //   setIsEmail(true);
-    //   setIsPassword(true);
-    //   return;
-    // }
-    // setIsEmail(false);
-    // setIsPassword(false);
-    console.log(user);
+    // execute signup mutation hook
+    signup(user);
   };
 
   return (
@@ -60,7 +62,9 @@ export default function SignupPage() {
             to enjoy all of our cool features
           </Text>
         </Stack>
+        {/* Signup Form */}
         <Box
+          w={"sm"}
           as="form"
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
@@ -69,32 +73,37 @@ export default function SignupPage() {
           onSubmit={submitHandler}
         >
           <Stack spacing={4}>
-            <HStack>
-              <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-            </HStack>
+            {/* Display error message from API */}
+            {signupIsError && (
+              <Alert status="error">
+                <AlertIcon />
+                <AlertDescription>
+                  {signupError?.message || "Signup failed. Please try again."}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            <FormControl id="name" isRequired>
+              <FormLabel>Name</FormLabel>
+              <Input
+                type="text"
+                name="name"
+                value={user.name}
+                onChange={onChangeHandler}
+                disabled={isSigningUp}
+                placeholder="Enter your name"
+              />
+            </FormControl>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
                 name="email"
                 value={user.email}
-                // isInvalid={isEmail}
                 onChange={onChangeHandler}
+                disabled={isSigningUp}
+                placeholder="Enter your email"
               />
-              {/* {isEmail ? (
-                <FormHelperText>Enter your email.</FormHelperText>
-              ) : null} */}
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
@@ -102,9 +111,10 @@ export default function SignupPage() {
                 <Input
                   name="password"
                   value={user.password}
-                  //   isInvalid={isPassword}
                   onChange={onChangeHandler}
                   type={showPassword ? "text" : "password"}
+                  disabled={isSigningUp}
+                  placeholder="Enter your password"
                 />
                 <InputRightElement h={"full"}>
                   <Button
@@ -118,13 +128,39 @@ export default function SignupPage() {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              {/* {isPassword ? (
-                <FormHelperText>Enter your password.</FormHelperText>
-              ) : null} */}
             </FormControl>
+
+            <FormControl id="passwordConfirm" isRequired>
+              <FormLabel>Confirm Password</FormLabel>
+              <InputGroup>
+                <Input
+                  name="passwordConfirm"
+                  value={user.passwordConfirm}
+                  onChange={onChangeHandler}
+                  type={showPasswordConfirm ? "text" : "password"}
+                  disabled={isSigningUp}
+                  placeholder="confirm your password"
+                />
+                <InputRightElement h={"full"}>
+                  <Button
+                    p={0}
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPasswordConfirm(
+                        (showPasswordConfirm) => !showPasswordConfirm
+                      )
+                    }
+                  >
+                    {showPasswordConfirm ? <FaEye /> : <FaEyeSlash />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            {/* Submit Button */}
             <Stack spacing={10} pt={2}>
               <Button
                 type="submit"
+                disabled={isSigningUp}
                 loadingText="Submitting"
                 size="lg"
                 bg={"green.400"}

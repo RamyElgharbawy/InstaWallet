@@ -22,6 +22,7 @@ const App = () => {
   return (
     <>
       <Routes>
+        {/* Auth Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         {/* App Layout */}

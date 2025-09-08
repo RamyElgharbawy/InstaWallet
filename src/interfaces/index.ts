@@ -1,3 +1,16 @@
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+export interface signupCredentials {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
 export interface LoginCredentials {
   email: string;
   password: string;

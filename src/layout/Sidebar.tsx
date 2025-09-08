@@ -29,8 +29,7 @@ import { NavLink as RouterLink } from "react-router-dom";
 import { SiHomeassistantcommunitystore, SiShopify } from "react-icons/si";
 import { TbPigMoney, TbReportMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
-import { useCookies } from "react-cookie";
-import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "../hooks/auth/authHook";
 
 interface LinkItemProps {
   path: string;
@@ -126,19 +125,11 @@ const NavItem = ({ icon, children, nav, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const queryClient = useQueryClient();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookies, removeCookie] = useCookies(["jwt"]);
+  // auth-hook mutations
+  const { logout, isLoggingOut, user, isLoadingUser } = useAuth();
 
-  const logout = () => {
-    removeCookie("jwt", { path: "/" });
-    // manually remove cookie
-    document.cookie =
-      "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=; secure=false;";
-
-    queryClient.clear();
-    window.location.href = "/";
-  };
+  // filter user data
+  const userData = user?.data || {};
 
   return (
     <Flex
@@ -201,9 +192,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">
+                    {isLoadingUser ? "user" : userData.name}
+                  </Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {isLoadingUser ? "user" : userData.role}
                   </Text>
                 </VStack>
                 <Box display={{ base: "none", md: "flex" }}>
@@ -221,7 +214,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem onClick={logout}>Sign out</MenuItem>
+              <MenuItem onClick={logout} disabled={isLoggingOut}>
+                {isLoggingOut ? "Logging out..." : "Logout"}
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

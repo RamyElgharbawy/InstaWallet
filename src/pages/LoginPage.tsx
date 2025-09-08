@@ -14,7 +14,6 @@ import {
   useColorModeValue,
   InputGroup,
   InputRightElement,
-  FormHelperText,
   Alert,
   AlertIcon,
   AlertDescription,
@@ -23,47 +22,26 @@ import {} from "@tanstack/react-query";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useLogin } from "../hooks/auth/login";
-import { loginUser } from "../config/httpReqUtils";
+import { useAuth } from "../hooks/auth/authHook";
 
 export default function LoginPage() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [isEmail, setIsEmail] = useState(false);
-  const [isPassword, setIsPassword] = useState(false);
 
   // login mutation hook
-  const loginMutation = useLogin();
+  const { login, isLoggingIn, loginIsError, loginError } = useAuth();
 
   // handle on inputs Changes
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    // Clear validation errors when user starts typing
-    if (name === "email" && isEmail) setIsEmail(false);
-    if (name === "password" && isPassword) setIsPassword(false);
   };
 
   // handle on form submit
   const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
-    // basic validation
-    if (!user.email && !user.password) {
-      setIsEmail(true);
-      setIsPassword(true);
-      return;
-    }
-
-    // clear previous validation error
-    setIsEmail(false);
-    setIsPassword(false);
-
     // login mutation
-    loginMutation.mutate(user);
-
-    // // navigate into user dashboard
-    // <Navigate to="/user" />;
+    login(user);
   };
 
   return (
@@ -90,12 +68,11 @@ export default function LoginPage() {
         >
           <Stack spacing={4}>
             {/* Display error message from API */}
-            {loginMutation.isError && (
+            {loginIsError && (
               <Alert status="error">
                 <AlertIcon />
                 <AlertDescription>
-                  {loginMutation.error?.message ||
-                    "Login failed. Please try again."}
+                  {loginError?.message || "Login failed. Please try again."}
                 </AlertDescription>
               </Alert>
             )}
@@ -105,17 +82,11 @@ export default function LoginPage() {
               <Input
                 name="email"
                 value={user.email}
-                isInvalid={isEmail}
                 onChange={onChangeHandler}
                 type="email"
-                disabled={loginMutation.isPending}
+                disabled={isLoggingIn}
                 placeholder="Enter your email"
               />
-              {isEmail ? (
-                <FormHelperText color={"red.500"}>
-                  Please Enter your email address.
-                </FormHelperText>
-              ) : null}
             </FormControl>
 
             <FormControl id="password" isRequired>
@@ -124,10 +95,9 @@ export default function LoginPage() {
                 <Input
                   name="password"
                   value={user.password}
-                  isInvalid={isPassword}
                   onChange={onChangeHandler}
                   type={showPassword ? "text" : "password"}
-                  disabled={loginMutation.isPending}
+                  disabled={isLoggingIn}
                   placeholder="Enter your password"
                 />
                 <InputRightElement h={"full"}>
@@ -137,17 +107,12 @@ export default function LoginPage() {
                     onClick={() =>
                       setShowPassword((showPassword) => !showPassword)
                     }
-                    disabled={loginMutation.isPending}
+                    disabled={isLoggingIn}
                   >
                     {showPassword ? <FaEye /> : <FaEyeSlash />}
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              {isPassword ? (
-                <FormHelperText color={"red.500"}>
-                  Please enter your password.
-                </FormHelperText>
-              ) : null}
             </FormControl>
 
             <Stack spacing={10}>
@@ -156,9 +121,7 @@ export default function LoginPage() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox disabled={loginMutation.isPending}>
-                  Remember me
-                </Checkbox>
+                <Checkbox disabled={isLoggingIn}>Remember me</Checkbox>
                 <Text
                   color={"green.400"}
                   cursor={"pointer"}
@@ -175,9 +138,9 @@ export default function LoginPage() {
                   bg: "green.500",
                 }}
                 type="submit"
-                isLoading={loginMutation.isPending}
+                isLoading={isLoggingIn}
                 loadingText="Signing in..."
-                disabled={loginMutation.isPending}
+                disabled={isLoggingIn}
                 size="lg"
               >
                 Sign in

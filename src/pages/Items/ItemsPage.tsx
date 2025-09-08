@@ -10,6 +10,7 @@ const ItemsPage = () => {
     queryKey: ["items"],
     queryFn: getAllItems,
   });
+  console.log(error);
 
   // filter data to get loan list
   const itemsList =
@@ -19,6 +20,12 @@ const ItemsPage = () => {
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
         Loading items...
+      </Box>
+    );
+  if (isError && error?.status === 404)
+    return (
+      <Box ml={{ base: 0, md: 60 }} p={4}>
+        No Data To Display......
       </Box>
     );
   if (isError)
