@@ -59,9 +59,15 @@ export default function HeroPage() {
             >
               Get Started
             </Button>
-            <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
+            {/* <Button
+              as={Link}
+              to={"/#feature"}
+              // variant={"link"}
+              colorScheme={"blue"}
+              size={"sm"}
+            >
               Learn more
-            </Button>
+            </Button> */}
             <Box>
               <Icon
                 as={Arrow}

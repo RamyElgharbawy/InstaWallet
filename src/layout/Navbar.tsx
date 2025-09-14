@@ -129,7 +129,9 @@ export default function Navbar() {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>User Profile</MenuItem>
+                  <MenuItem as={RouterLink} to={"/user/profile"}>
+                    User Profile
+                  </MenuItem>
                   <MenuItem as={RouterLink} to={"/user"}>
                     Dashboard
                   </MenuItem>

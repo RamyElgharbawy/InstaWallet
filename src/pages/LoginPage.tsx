@@ -160,6 +160,19 @@ export default function LoginPage() {
                   SignUp
                 </Text>
               </Text>
+              <Text align={"center"}>
+                Or go to{" "}
+                <Text
+                  as={Link}
+                  to={"/"}
+                  color="green.500"
+                  fontWeight={"semibold"}
+                  textDecoration={"underline"}
+                  _hover={{ color: "green.600" }}
+                >
+                  Home Page
+                </Text>
+              </Text>
             </Stack>
           </Stack>
         </Box>

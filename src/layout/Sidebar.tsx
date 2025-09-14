@@ -166,12 +166,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         {/* Theme Mode  */}
         <ColorModeToggleButton />
 
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
         <Flex alignItems={"center"}>
           <Menu>
             <MenuButton
@@ -179,6 +173,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               transition="all 0.3s"
               _focus={{ boxShadow: "none" }}
             >
+              {/* User Profile */}
               <HStack>
                 <Avatar
                   size={"sm"}
@@ -204,15 +199,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 </Box>
               </HStack>
             </MenuButton>
+            {/* User Profile Menu List */}
             <MenuList
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem as={RouterLink} to={"/user/profile"}>
-                Profile
+                My Profile
               </MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
               <MenuDivider />
               <MenuItem onClick={logout} disabled={isLoggingOut}>
                 {isLoggingOut ? "Logging out..." : "Logout"}

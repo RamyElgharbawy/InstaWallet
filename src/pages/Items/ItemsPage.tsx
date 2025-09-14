@@ -10,7 +10,6 @@ const ItemsPage = () => {
     queryKey: ["items"],
     queryFn: getAllItems,
   });
-  console.log(error);
 
   // filter data to get loan list
   const itemsList =
