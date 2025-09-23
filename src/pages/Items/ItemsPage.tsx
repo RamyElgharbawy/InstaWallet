@@ -1,48 +1,42 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import ActiveSection from "../../components/shared/ActiveSection";
 import TableWithHeading from "../../components/shared/TableWithHeading";
-import { useQuery } from "@tanstack/react-query";
-import { getAllItems } from "../../config/httpReqUtils";
-import type { IItem } from "../../interfaces";
+import { useItems } from "../../hooks/itemsHook";
+import AppAlert from "../../components/shared/ErrorAlert";
 
 const ItemsPage = () => {
-  const { isLoading, data, error, isError } = useQuery({
-    queryKey: ["items"],
-    queryFn: getAllItems,
-  });
+  const { isLoadingItems, itemsList, isItemsError, itemsError } = useItems();
 
-  // filter data to get loan list
-  const itemsList =
-    data?.data.filter((item: IItem) => item.type === "purchaseItem") || [];
+  // validate items data
+  const items = itemsList?.data || [];
 
-  if (isLoading)
+  if (isLoadingItems)
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
-        Loading items...
-      </Box>
-    );
-  if (isError && error?.status === 404)
-    return (
-      <Box ml={{ base: 0, md: 60 }} p={4}>
-        No Data To Display......
-      </Box>
-    );
-  if (isError)
-    return (
-      <Box ml={{ base: 0, md: 60 }} p={4}>
-        Error: {error.message}
+        <AppAlert status="info" message=" Loading items..." />
       </Box>
     );
 
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <ActiveSection name="Item" data={itemsList} />
+      <ActiveSection name="Item" data={items} />
 
-      <TableWithHeading
-        title="My Items"
-        tvariant="simple"
-        tableData={itemsList}
-      />
+      <Divider borderWidth={"thin"} mt={7} />
+
+      {isItemsError && itemsError?.status === 404 ? (
+        <AppAlert
+          status="error"
+          message={itemsError.message}
+          code={itemsError.status}
+        />
+      ) : (
+        <TableWithHeading
+          title="My Items"
+          tvariant="simple"
+          tableData={items}
+          withNavigate
+        />
+      )}
     </Box>
   );
 };

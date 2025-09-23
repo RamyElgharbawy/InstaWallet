@@ -2,14 +2,19 @@
 import { Box } from "@chakra-ui/react";
 import { AppForm } from "../../components/shared/AppForm";
 import * as Yup from "yup";
+import { useItems } from "../../hooks/itemsHook";
 
 // Form Field
 const itemFields = [
-  // {
-  //   name: "type",
-  //   label: "Item Type",
-  //   placeholder: "purchaseItem or loan",
-  // },
+  {
+    name: "type",
+    label: "Item Type",
+    type: "select",
+    options: [
+      { value: "purchaseItem", label: "Purchasing Item" },
+      { value: "loan", label: "Loan" },
+    ],
+  },
   {
     name: "title",
     label: "Title",
@@ -24,7 +29,7 @@ const itemFields = [
   {
     name: "purchaseDate",
     label: "Purchase Date",
-    placeholder: "01/01/2025",
+    placeholder: "YYYY-MM-DD",
   },
   {
     name: "numberOfMonths",
@@ -35,12 +40,12 @@ const itemFields = [
   {
     name: "startIn",
     label: "Start In",
-    placeholder: "01/01/2025",
+    placeholder: "YYYY-MM-DD",
   },
   {
     name: "endIn",
     label: "End In",
-    placeholder: "01/01/2026",
+    placeholder: "YYYY-MM-DD",
   },
   {
     name: "notes",
@@ -52,21 +57,36 @@ const itemFields = [
 
 // validation schema
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required("Required"),
-  price: Yup.number().min(1, "Amount must be positive number").required(),
+  type: Yup.string().oneOf(["purchaseItem", "loan"]).required("Type Required"),
+  title: Yup.string().required("Title Required"),
+  price: Yup.number()
+    .transform((_, originalValue) => {
+      return originalValue === "" ? undefined : Number(originalValue);
+    })
+    .typeError("Price must be a number")
+    .min(1, "Price must be positive number")
+    .required("Price is required"),
   purchaseDate: Yup.date().required(),
   numberOfMonths: Yup.number()
-    .min(1, "Amount must be positive number")
-    .required(),
+    .transform((_, originalValue) =>
+      originalValue === "" ? undefined : Number(originalValue)
+    )
+    .typeError("Number of months must be a number")
+    .required("Number of months is required"),
   startIn: Yup.date().required(),
   endIn: Yup.date().required(),
   notes: Yup.string().notRequired(),
 });
 
 const AddItemPage = () => {
+  const { createItem } = useItems();
+
   const handleSubmit = (values: any, actions: any) => {
-    alert(JSON.stringify(values));
-    console.log(values, null, 2);
+    // cast values from input to convert string  input fields to numbers
+    const castedValues = validationSchema.cast(values);
+    // execute mutation function
+    createItem(castedValues);
+
     actions.setSubmitting(false);
   };
 

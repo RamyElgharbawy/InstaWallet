@@ -40,7 +40,13 @@ const Ticket = ({ title, subTitle }: ITicketProps) => {
         {title}
       </Text>
       <Divider />
-      <Text fontSize={"sm"} p={2}>
+      <Text
+        w={"full"}
+        textAlign={"center"}
+        textOverflow={"clip"}
+        fontSize={"sm"}
+        p={2}
+      >
         {subTitle}
       </Text>
     </Flex>
@@ -51,8 +57,6 @@ const ActiveSection = ({ name, data }: ISectionProps) => {
   // get current location
   const currentLocation = useLocation();
   const path = `${currentLocation.pathname}/add${name}`;
-  // // active cards data
-  // const activeCards = data?.data || [];
 
   return (
     <Box p={0}>
@@ -60,9 +64,10 @@ const ActiveSection = ({ name, data }: ISectionProps) => {
         <Text fontSize={"2xl"} fontWeight={"semibold"}>
           Active {name}s
         </Text>
+
         <HStack>
           {/* Edit Button Menu */}
-          <Menu>
+          {/* <Menu>
             <MenuButton
               as={Button}
               size={"sm"}
@@ -85,7 +90,7 @@ const ActiveSection = ({ name, data }: ISectionProps) => {
               <MenuDivider />
               <MenuItem icon={<MdDeleteOutline size={17} />}>Delete</MenuItem>
             </MenuList>
-          </Menu>
+          </Menu> */}
           {/* Add New Button */}
           <Button
             as={RouterLink}

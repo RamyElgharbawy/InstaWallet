@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Flex,
   HStack,
   SimpleGrid,
@@ -38,12 +39,12 @@ function StatsCard(props: StatsCardProps) {
       border={"1px solid"}
       borderColor={useColorModeValue("gray.800", "gray.500")}
       rounded={"lg"}
-      // bgColor={useColorModeValue("gray.100", "gray.700")}
+      _hover={{ bgColor: "green.700" }}
     >
-      <StatLabel color={"green.600"} fontWeight={"medium"} isTruncated>
+      <StatLabel mb={2} textAlign={"center"} fontWeight={"medium"} isTruncated>
         {title}
       </StatLabel>
-      <StatNumber fontSize={"2xl"} fontWeight={"medium"}>
+      <StatNumber textAlign={"center"} fontSize={"2xl"} fontWeight={"medium"}>
         {stat}
       </StatNumber>
     </Stat>
@@ -121,6 +122,8 @@ const SpendingsPage = () => {
 
       {/* Spending Table */}
       <TableWithHeading title="" tvariant="simple" tableData={spendingList} />
+
+      <Divider borderWidth={"thin"} mt={7} />
 
       {/* Summary section */}
       <Box pt={5}>

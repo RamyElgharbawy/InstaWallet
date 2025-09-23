@@ -39,6 +39,7 @@ export const AppForm = ({
   return (
     <Box p={4} maxW="lg">
       <Formik
+        enableReinitialize
         initialValues={defaultInitialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
@@ -46,7 +47,7 @@ export const AppForm = ({
         {({ isSubmitting }) => (
           <Form>
             <VStack spacing={4}>
-              {fields.map((field) => (
+              {fields.map(({ defaultValue, ...field }) => (
                 <FormInput
                   key={field.name}
                   name={field.name}

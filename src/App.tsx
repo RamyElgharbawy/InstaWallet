@@ -17,6 +17,7 @@ import ItemDetailsPage from "./pages/Items/ItemDetailsPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import LoanDetailsPage from "./pages/Loan/LoanDetailsPage";
 import FellowDetailsPage from "./pages/Fellows/FellowDetailsPage";
+import UpdateItemPage from "./pages/Items/UpdateItemPage";
 
 const App = () => {
   return (
@@ -45,8 +46,10 @@ const App = () => {
           <Route path="items">
             <Route index element={<ItemsPage />} />
             <Route path="addItem" element={<AddItemPage />} />
-            <Route path="editItem" element={<AddItemPage />} />
-            <Route path="details" element={<ItemDetailsPage />} />
+            <Route path=":itemId">
+              <Route index element={<ItemDetailsPage />} />
+              <Route path="edit" element={<UpdateItemPage />} />
+            </Route>
           </Route>
           {/* User Loans Route */}
           <Route path="loan">

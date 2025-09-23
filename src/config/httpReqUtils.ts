@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "./axios.config";
 import type { LoginCredentials, signupCredentials } from "../interfaces";
 
@@ -20,11 +21,42 @@ export const getSpendingList = async () => {
 };
 
 // get item details function
-export const getItem = async () => {
-  const { data } = await axiosInstance.get(
-    `/items/d0a76a19-68ca-4d98-8afa-ddeadd3cf516`
-  );
+export const getSpecificItem = async (id: string) => {
+  const { data } = await axiosInstance.get(`/items/${id}`);
   return data;
+};
+
+// create new item function
+export const addNewItem = async (item) => {
+  try {
+    const { data } = await axiosInstance.post("/items", item);
+    return data;
+  } catch (error: any) {
+    console.log("API error response", error.response?.data);
+    throw error;
+  }
+};
+
+// update specific item
+export const updateSpecificItem = async (id: string, item) => {
+  try {
+    const { data } = await axiosInstance.put(`/items/${id}`, item);
+    return data;
+  } catch (error) {
+    console.log("API error response", error);
+    throw error;
+  }
+};
+
+// delete specific item
+export const deleteSpecificItem = async (id: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/items/${id}`);
+    return data;
+  } catch (error) {
+    console.log("API error response", error);
+    throw error;
+  }
 };
 
 // login function

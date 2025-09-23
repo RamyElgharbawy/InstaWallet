@@ -1,55 +1,41 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import ItemDetails from "../../components/ItemDetails";
-import { useQuery } from "@tanstack/react-query";
-import ShareTable from "../../components/shared/ShareTable";
-import { getItem } from "../../config/httpReqUtils";
+import { useItems } from "../../hooks/itemsHook";
+import AppAlert from "../../components/shared/ErrorAlert";
+import TableWithHeading from "../../components/shared/TableWithHeading";
 
 const ItemDetailsPage = () => {
-  const { isLoading, data, isError, error } = useQuery({
-    queryKey: ["items"],
-    queryFn: getItem,
-  });
+  const { isLoadingItem, item, itemError } = useItems();
+  // validate item data
+  const itemData = item?.data || {};
 
-  if (isLoading)
+  if (isLoadingItem)
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
-        Loading items...
+        <Spinner />
       </Box>
     );
-  if (isError)
-    return (
-      <Box ml={{ base: 0, md: 60 }} p={4}>
-        Error: {error.message}
-      </Box>
-    );
+
+  if (itemError) return <AppAlert status="error" message={itemError.message} />;
 
   return (
     <Box ml={{ base: 0, md: 60 }} p={4}>
-      <ItemDetails {...data?.data} />
+      <ItemDetails {...itemData} />
 
       {/* Shares breakdown table */}
-      <Flex flexDirection={"column"} gap={2} my={5}>
-        <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>
-          Shares Breakdown
-        </Text>
-        <ShareTable
-          tvariant="simple"
-          withButton={false}
-          tableData={data?.data.shares}
-        />
-      </Flex>
+      <TableWithHeading
+        tvariant="simple"
+        title="Shares Breakdown"
+        tableData={itemData.shares}
+      />
 
       {/* Remaining shares table */}
-      <Flex flexDirection={"column"} gap={2} my={5}>
-        <Text fontSize={"xl"} fontWeight={"semibold"} mb={2}>
-          Remaining Shares
-        </Text>
-        <ShareTable
-          tvariant="striped"
-          withButton={true}
-          tableData={data?.data.shares}
-        />
-      </Flex>
+      <TableWithHeading
+        tvariant="striped"
+        title="Remaining Shares"
+        tableData={itemData.shares}
+        withButton
+      />
     </Box>
   );
 };

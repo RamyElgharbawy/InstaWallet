@@ -27,7 +27,7 @@ import Logo from "../components/Logo";
 import ColorModeToggleButton from "../components/ColorModeToggleButton";
 import { NavLink as RouterLink } from "react-router-dom";
 import { SiHomeassistantcommunitystore, SiShopify } from "react-icons/si";
-import { TbPigMoney, TbReportMoney } from "react-icons/tb";
+import { TbPigMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { useAuth } from "../hooks/auth/authHook";
 
@@ -54,7 +54,7 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { path: "", name: "Home", icon: SiHomeassistantcommunitystore },
   { path: "items", name: "Items", icon: SiShopify },
-  { path: "loan", name: "Loan", icon: TbReportMoney },
+  // { path: "loan", name: "Loan", icon: TbReportMoney },
   { path: "fellows", name: "Fellows", icon: TbPigMoney },
   { path: "spendings", name: "Spendings", icon: FaMoneyBillTransfer },
 ];

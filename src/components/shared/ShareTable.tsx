@@ -38,16 +38,16 @@ const ShareTable = ({ tvariant, withButton, tableData }: ITableProps) => {
           {tableData?.map((item, indx) => {
             return (
               <Tr key={indx}>
-                <Td>{item.dueDate ? formatDate(item.dueDate) : ""}</Td>
+                <Td>{item.dueDate ? formatDate(item.dueDate) : "_"}</Td>
                 <Td>{item.amount}</Td>
-                <Td>{item.payDate ? formatDate(item.payDate) : "_"}</Td>
+                <Td>{item.payStatus ? "paid" : "remaining"}</Td>
 
                 {/* Action Button */}
                 {withButton ? (
                   <Td>
                     <IconButton
                       as={Link}
-                      to={"/user/edit"}
+                      to={""}
                       aria-label="Edit Record"
                       icon={<FiEdit size={17} />}
                       size="xs"
