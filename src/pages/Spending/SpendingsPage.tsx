@@ -16,12 +16,12 @@ import { MdOutlineSearch } from "react-icons/md";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import TableWithHeading from "../../components/shared/TableWithHeading";
 import { useQuery } from "@tanstack/react-query";
-import { getSpendingList } from "../../config/httpReqUtils";
 import type { ISpending } from "../../interfaces";
 import {
   calculateNextDueDate,
   isOverdue,
 } from "../../utils/calculateNextDueDate";
+import { getSpendingList } from "../../config/httpRequests/spendingReq";
 
 interface StatsCardProps {
   title: string;

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 import {
   addNewItem,
   deleteSpecificItem,
   getAllItems,
   getSpecificItem,
   updateSpecificItem,
-} from "../config/httpReqUtils";
-import { useNavigate, useParams } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
+} from "../config/httpRequests/itemsReq";
 
 export const useItems = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export const useItems = () => {
   // Specific Item query
   const getItem = useQuery({
     queryKey: ["items", itemId],
-    queryFn: () => getSpecificItem(itemId),
+    queryFn: () => getSpecificItem(itemId as string),
     enabled: !!itemId,
   });
 

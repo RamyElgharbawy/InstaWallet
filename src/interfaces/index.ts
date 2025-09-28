@@ -1,4 +1,5 @@
 export interface IUser {
+  id?: string;
   name: string;
   email: string;
   password: string;
@@ -17,6 +18,7 @@ export interface LoginCredentials {
 }
 
 export interface IShare {
+  id?: string;
   amount: number;
   dueDate: string;
   payDate: string;
@@ -26,6 +28,7 @@ export interface IShare {
 }
 
 export interface IItem {
+  id?: string;
   type: string;
   title: string;
   price: number;
@@ -41,6 +44,7 @@ export interface IItem {
 }
 
 export interface IFellow {
+  id?: string;
   manager: string;
   amount: number;
   numberOfMonths: number;
@@ -53,6 +57,7 @@ export interface IFellow {
 }
 
 export interface ISpending {
+  id?: string;
   name: string;
   amount: number;
   schedule: string;

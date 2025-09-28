@@ -20,17 +20,15 @@ import {
 } from "@chakra-ui/react";
 
 import { Link as RouterLink } from "react-router-dom";
+// navigation links that point to specific sections of a page.
 import { HashLink as Link } from "react-router-hash-link";
-
-// import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose, MdOutlineWbSunny } from "react-icons/md";
 import { FaRegMoon } from "react-icons/fa";
 import { TbLogin2 } from "react-icons/tb";
 import Logo from "../components/Logo";
-import {} from "react-router-hash-link";
 import { useCookies } from "react-cookie";
-import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "../hooks/auth/authHook";
 
 interface Props {
   children: React.ReactNode;
@@ -61,23 +59,14 @@ const NavLink = (props: Props) => {
 };
 
 export default function Navbar() {
-  const queryClient = useQueryClient();
   // cookie hook
-  const [cookies, removeCookie] = useCookies(["jwt"]);
+  const [cookies] = useCookies(["jwt"]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
-  // logout function
-  const logout = () => {
-    removeCookie("jwt", { path: "/" });
-    // manually remove cookie
-    document.cookie =
-      "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=; secure=false;";
-
-    queryClient.clear();
-    window.location.href = "/";
-  };
+  // auth-hook mutations
+  const { logout, isLoggingOut } = useAuth();
 
   return (
     <>
@@ -136,7 +125,9 @@ export default function Navbar() {
                     Dashboard
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem onClick={logout}>Logout</MenuItem>
+                  <MenuItem onClick={logout} disabled={isLoggingOut}>
+                    {isLoggingOut ? "Logging out..." : "Logout"}
+                  </MenuItem>
                 </MenuList>
               </Menu>
             ) : (

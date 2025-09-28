@@ -2,8 +2,9 @@ import { Box, Divider, Spinner } from "@chakra-ui/react";
 import TableWithHeading from "../../components/shared/TableWithHeading";
 import ActiveSection from "../../components/shared/ActiveSection";
 import { useQuery } from "@tanstack/react-query";
-import { getAllFellows } from "../../config/httpReqUtils";
+
 import AppAlert from "../../components/shared/ErrorAlert";
+import { getAllFellows } from "../../config/httpRequests/fellowsReq";
 
 const FellowsPage = () => {
   const { isLoading, data, error, isError } = useQuery({

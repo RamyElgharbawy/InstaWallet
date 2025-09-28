@@ -21,7 +21,7 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import type { BoxProps, FlexProps } from "@chakra-ui/react";
-import { FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
+import { FiMenu, FiChevronDown } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import Logo from "../components/Logo";
 import ColorModeToggleButton from "../components/ColorModeToggleButton";
@@ -54,7 +54,6 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { path: "", name: "Home", icon: SiHomeassistantcommunitystore },
   { path: "items", name: "Items", icon: SiShopify },
-  // { path: "loan", name: "Loan", icon: TbReportMoney },
   { path: "fellows", name: "Fellows", icon: TbPigMoney },
   { path: "spendings", name: "Spendings", icon: FaMoneyBillTransfer },
 ];

@@ -8,14 +8,11 @@ import UserDashboard from "./pages/UserDashboard";
 import FellowsPage from "./pages/Fellows/FellowsPage";
 import ItemsPage from "./pages/Items/ItemsPage";
 import SpendingsPage from "./pages/Spending/SpendingsPage";
-import LoanPage from "./pages/Loan/LoanPage";
 import AddFellowPage from "./pages/Fellows/AddFellowPage";
 import AddItemPage from "./pages/Items/AddItemPage";
-import AddLoanPage from "./pages/Loan/AddLoanPage";
 import AddSpendingPage from "./pages/Spending/AddSpendingPage";
 import ItemDetailsPage from "./pages/Items/ItemDetailsPage";
 import UserProfilePage from "./pages/UserProfilePage";
-import LoanDetailsPage from "./pages/Loan/LoanDetailsPage";
 import FellowDetailsPage from "./pages/Fellows/FellowDetailsPage";
 import UpdateItemPage from "./pages/Items/UpdateItemPage";
 
@@ -51,13 +48,7 @@ const App = () => {
               <Route path="edit" element={<UpdateItemPage />} />
             </Route>
           </Route>
-          {/* User Loans Route */}
-          <Route path="loan">
-            <Route index element={<LoanPage />} />
-            <Route path="addLoan" element={<AddLoanPage />} />
-            <Route path="editLoan" element={<AddLoanPage />} />
-            <Route path="details" element={<LoanDetailsPage />} />
-          </Route>
+
           {/* User Spendings Route */}
           <Route path="spendings">
             <Route index element={<SpendingsPage />} />

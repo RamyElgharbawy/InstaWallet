@@ -58,7 +58,7 @@ const ItemDetails = (itemData: IItem) => {
             confirmText="Delete"
             cancelText="Cancel"
             isLoading={isDeleting}
-            onConfirm={() => deleteItem(itemData.id)}
+            onConfirm={() => deleteItem(itemData.id as string)}
             trigger={
               <Button
                 leftIcon={<MdOutlineDeleteForever size={"17"} />}

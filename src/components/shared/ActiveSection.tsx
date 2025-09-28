@@ -6,22 +6,11 @@ import {
   Divider,
   Flex,
   HStack,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
 
-import {
-  MdDeleteOutline,
-  MdMoney,
-  MdOutlineAddBox,
-  MdOutlineCheckBox,
-  MdOutlineEdit,
-} from "react-icons/md";
+import { MdOutlineAddBox } from "react-icons/md";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
 interface ISectionProps {

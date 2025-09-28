@@ -1,6 +1,6 @@
-import { Card, Grid, Heading, Icon, Text, VStack } from "@chakra-ui/react";
+import { Card, Grid, Heading, Text, VStack } from "@chakra-ui/react";
 import { SiCashapp } from "react-icons/si";
-import { TbBrandCashapp } from "react-icons/tb";
+// import { TbBrandCashapp } from "react-icons/tb";
 
 // interface IProps{
 

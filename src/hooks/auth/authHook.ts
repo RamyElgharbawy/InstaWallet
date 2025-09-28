@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
-import { loginUser, signup } from "../../config/httpReqUtils";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../config/axios.config";
+import { loginUser, signup } from "../../config/httpRequests/authReq";
 
 export const useAuth = () => {
   const navigate = useNavigate();
