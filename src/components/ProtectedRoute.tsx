@@ -1,16 +1,16 @@
 import type { ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../hooks/auth/authHook";
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  // get token from cookies
-  const [cookies] = useCookies(["jwt"]);
+  const { isAuthenticated } = useAuth();
 
-  if (!cookies.jwt) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 

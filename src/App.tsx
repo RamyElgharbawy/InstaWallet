@@ -15,19 +15,36 @@ import ItemDetailsPage from "./pages/Items/ItemDetailsPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import FellowDetailsPage from "./pages/Fellows/FellowDetailsPage";
 import UpdateItemPage from "./pages/Items/UpdateItemPage";
+import PublicRoute from "./components/PublicRoute";
 
 const App = () => {
   return (
     <>
       <Routes>
-        {/* Auth Routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        {/* Auth Routes [Public]*/}
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <SignupPage />
+            </PublicRoute>
+          }
+        />
+
         {/* App Layout */}
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
         </Route>
-        {/* User Dashboard Layout*/}
+
+        {/* User Dashboard Layout [Private]*/}
         <Route path="/user" element={<DashboardLayout />}>
           <Route index element={<UserDashboard />} />
           <Route path="statistics" element={<UserDashboard />} />
