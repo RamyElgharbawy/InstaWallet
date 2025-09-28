@@ -79,7 +79,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddItemPage = () => {
-  const { createItem } = useItems();
+  const { isCreating, createItem } = useItems();
 
   const handleSubmit = (values: any, actions: any) => {
     // cast values from input to convert string  input fields to numbers
@@ -97,6 +97,7 @@ const AddItemPage = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         submitText="Add Item"
+        loadingStatus={isCreating}
       />
     </Box>
   );

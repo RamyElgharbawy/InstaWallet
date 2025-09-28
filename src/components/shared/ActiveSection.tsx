@@ -109,7 +109,7 @@ const ActiveSection = ({ name, data }: ISectionProps) => {
             );
           })
         ) : (
-          <Text>No data available</Text>
+          <Text>{`No ${name}'s available`}</Text>
         )}
       </SimpleGrid>
     </Box>

@@ -20,6 +20,8 @@ type AppFormProps = {
   initialValues?: any;
   submitText?: string;
   buttons?: React.ReactNode;
+  loadingStatus?: boolean;
+  loadingTxt?: string;
 };
 
 export const AppForm = ({
@@ -29,6 +31,8 @@ export const AppForm = ({
   initialValues = {},
   submitText = "Submit",
   buttons,
+  loadingStatus,
+  loadingTxt = "Submitting...",
 }: AppFormProps) => {
   // Generate initial values from fields if not provided
   const defaultInitialValues = fields.reduce((acc, field) => {
@@ -44,35 +48,35 @@ export const AppForm = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting }) => (
-          <Form>
-            <VStack spacing={4}>
-              {fields.map(({ defaultValue, ...field }) => (
-                <FormInput
-                  key={field.name}
-                  name={field.name}
-                  label={field.label}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  options={field.options}
-                  {...field}
-                />
-              ))}
+        <Form>
+          <VStack spacing={4}>
+            {fields.map(({ defaultValue, ...field }) => (
+              <FormInput
+                key={field.name}
+                name={field.name}
+                label={field.label}
+                type={field.type}
+                placeholder={field.placeholder}
+                options={field.options}
+                {...field}
+              />
+            ))}
 
-              <HStack spacing={4} w="full">
-                <Button
-                  type="submit"
-                  colorScheme="green"
-                  isLoading={isSubmitting}
-                  flex={1}
-                >
-                  {submitText}
-                </Button>
-                {buttons}
-              </HStack>
-            </VStack>
-          </Form>
-        )}
+            <HStack spacing={4} w="full">
+              <Button
+                type="submit"
+                colorScheme="green"
+                isLoading={loadingStatus}
+                loadingText={loadingTxt}
+                disabled={loadingStatus}
+                flex={1}
+              >
+                {submitText}
+              </Button>
+              {buttons}
+            </HStack>
+          </VStack>
+        </Form>
       </Formik>
     </Box>
   );

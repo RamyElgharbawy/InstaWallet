@@ -2,6 +2,7 @@
 import { Box } from "@chakra-ui/react";
 import { AppForm } from "../../components/shared/AppForm";
 import * as Yup from "yup";
+import { useFellows } from "../../hooks/fellowsHook";
 
 // Form Field
 const fellowFields = [
@@ -42,21 +43,44 @@ const fellowFields = [
 
 // validation schema
 const validationSchema = Yup.object().shape({
-  manager: Yup.string().required("Required"),
-  amount: Yup.number().min(1, "Amount must be positive number").required(),
+  manager: Yup.string().required("Fellow manager Required"),
+  amount: Yup.number()
+    .transform((_, originalValue) => {
+      return originalValue === "" ? undefined : Number(originalValue);
+    })
+    .typeError("Amount must be a number")
+    .min(1, "Amount must be positive number")
+    .required(),
   startIn: Yup.date().required(),
   endIn: Yup.date().required(),
   numberOfMonths: Yup.number()
-    .min(1, "Amount must be positive number")
+    .transform((_, originalValue) => {
+      return originalValue === "" ? undefined : Number(originalValue);
+    })
+    .typeError("Number Of Months must be a number")
+    .min(1, "Number Of Months must be positive number")
     .required(),
-  turnMonth: Yup.number().min(1, "Amount must be positive number").required(),
+  turnMonth: Yup.number()
+    .transform((_, originalValue) => {
+      return originalValue === "" ? undefined : Number(originalValue);
+    })
+    .typeError("Turn month must be a number")
+    .min(1, "Turn month must be positive number")
+    .required(),
 });
+
 const AddFellowPage = () => {
+  const { isCreatingFellow, createFellow } = useFellows();
+
   const handleSubmit = (values: any, actions: any) => {
-    alert(JSON.stringify(values));
-    console.log("Profile values:", values);
+    // cast values from input to convert string  input fields to numbers
+    const castedValues = validationSchema.cast(values);
+    // execute mutation function
+    createFellow(castedValues);
+
     actions.setSubmitting(false);
   };
+
   return (
     <Box ml={{ base: 0, md: 60 }}>
       <AppForm
@@ -64,6 +88,7 @@ const AddFellowPage = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         submitText="Add Fellow"
+        loadingStatus={isCreatingFellow}
       />
     </Box>
   );

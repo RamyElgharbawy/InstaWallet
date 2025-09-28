@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const UpdateItemPage = () => {
-  const { item, isLoadingItem, updateItem } = useItems();
+  const { item, isLoadingItem, isUpdating, updateItem } = useItems();
 
   // validate item data
   const itemData = item?.data || {};
@@ -59,20 +59,20 @@ const UpdateItemPage = () => {
         { value: "purchaseItem", label: "Purchasing Item" },
         { value: "loan", label: "Loan" },
       ],
-      defaultValue: `${normalizedData.type}`,
+      defaultValue: normalizedData.type,
     },
     {
       name: "title",
       label: "Title",
       placeholder: "ex. something",
-      defaultValue: `${normalizedData.title}`,
+      defaultValue: normalizedData.title,
     },
     {
       name: "price",
       label: "Price",
       type: "number",
       placeholder: "ex. 3000",
-      defaultValue: `${normalizedData.price}`,
+      defaultValue: normalizedData.price,
     },
     {
       name: "purchaseDate",
@@ -85,7 +85,7 @@ const UpdateItemPage = () => {
       label: "Number Of Months",
       type: "number",
       placeholder: "12",
-      defaultValue: `${normalizedData.numberOfMonths}`,
+      defaultValue: normalizedData.numberOfMonths,
     },
     {
       name: "startIn",
@@ -104,7 +104,7 @@ const UpdateItemPage = () => {
       label: "Notes",
       type: "textarea",
       placeholder: "Item details",
-      defaultValue: `${normalizedData.notes}`,
+      defaultValue: normalizedData.notes,
     },
   ];
 
@@ -131,6 +131,8 @@ const UpdateItemPage = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         submitText="Update Item"
+        loadingStatus={isUpdating}
+        loadingTxt="Updating...."
       />
     </Box>
   );
