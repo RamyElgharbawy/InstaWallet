@@ -25,7 +25,7 @@ import { FiMenu, FiChevronDown } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import Logo from "../components/Logo";
 import ColorModeToggleButton from "../components/ColorModeToggleButton";
-import { NavLink as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink, useNavigate } from "react-router-dom";
 import { SiHomeassistantcommunitystore, SiShopify } from "react-icons/si";
 import { TbPigMoney } from "react-icons/tb";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
@@ -124,6 +124,7 @@ const NavItem = ({ icon, children, nav, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const navigate = useNavigate();
   // auth-hook mutations
   const { logout, isLoggingOut, user, isLoadingUser } = useAuth();
 
@@ -207,7 +208,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 My Profile
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={logout} disabled={isLoggingOut}>
+              <MenuItem
+                onClick={() => logout(navigate)}
+                disabled={isLoggingOut}
+              >
                 {isLoggingOut ? "Logging out..." : "Logout"}
               </MenuItem>
             </MenuList>

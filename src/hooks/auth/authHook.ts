@@ -50,8 +50,8 @@ export const useAuth = () => {
   // Logout mutation
   const logoutMutation = useMutation({
     mutationFn: async () => {},
-    onSuccess: () => logout(),
-    onError: () => logout(), // Force logout even if API fails
+    onSuccess: () => logout(navigate),
+    onError: () => logout(navigate), // Force logout even if API fails
   });
 
   // User query
@@ -75,12 +75,16 @@ export const useAuth = () => {
   });
 
   // Logout function
-  const logout = () => {
+  const logout = (navigate?: (path: string) => void) => {
     removeCookie("jwt", { path: "/" });
     document.cookie =
       "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=; secure=false;";
     queryClient.clear();
-    window.location.href = "/";
+    if (navigate) {
+      navigate("/");
+    } else {
+      window.location.href = "/";
+    }
   };
 
   return {

@@ -15,13 +15,13 @@ import { HiOutlineFilter, HiSortDescending } from "react-icons/hi";
 import { MdOutlineSearch } from "react-icons/md";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import TableWithHeading from "../../components/shared/TableWithHeading";
-import { useQuery } from "@tanstack/react-query";
 import type { ISpending } from "../../interfaces";
 import {
   calculateNextDueDate,
   isOverdue,
 } from "../../utils/calculateNextDueDate";
-import { getSpendingList } from "../../config/httpRequests/spendingReq";
+import { useSpendings } from "../../hooks/spendingHook";
+import AppAlert from "../../components/shared/ErrorAlert";
 
 interface StatsCardProps {
   title: string;
@@ -57,14 +57,12 @@ const SpendingsPage = () => {
   const path = `${currentLocation.pathname}/addSpending`;
 
   // get data from api
-  const { isLoading, data, error, isError } = useQuery({
-    queryKey: ["spendings"],
-    queryFn: getSpendingList,
-  });
-  const spendingList = data?.data || [];
+  const { isLoadingSpendings, spendingsList, spendingsError } = useSpendings();
+  // validate spendings data
+  const allSpendings = spendingsList?.data || [];
 
   // get active schedule
-  const activeSpendings = spendingList.filter(
+  const activeSpendings = allSpendings.filter(
     (active: ISpending) => active.status === "remaining"
   );
 
@@ -87,16 +85,21 @@ const SpendingsPage = () => {
     0
   );
 
-  if (isLoading)
+  if (isLoadingSpendings)
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
-        Loading spendings...
+        <AppAlert status="info" message=" Loading Spendings..." />
       </Box>
     );
-  if (isError)
+
+  if (spendingsError)
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
-        Error: {error.message}
+        <AppAlert
+          status="error"
+          message={spendingsError.message}
+          code={spendingsError.status}
+        />
       </Box>
     );
 
@@ -121,7 +124,12 @@ const SpendingsPage = () => {
       </HStack>
 
       {/* Spending Table */}
-      <TableWithHeading title="" tvariant="simple" tableData={spendingList} />
+      <TableWithHeading
+        title=""
+        tvariant="simple"
+        tableData={allSpendings}
+        withNavigate
+      />
 
       <Divider borderWidth={"thin"} mt={7} />
 

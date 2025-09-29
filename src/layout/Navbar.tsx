@@ -19,7 +19,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 // navigation links that point to specific sections of a page.
 import { HashLink as Link } from "react-router-hash-link";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -59,6 +59,7 @@ const NavLink = (props: Props) => {
 };
 
 export default function Navbar() {
+  const navigate = useNavigate();
   // cookie hook
   const [cookies] = useCookies(["jwt"]);
 
@@ -125,7 +126,10 @@ export default function Navbar() {
                     Dashboard
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem onClick={logout} disabled={isLoggingOut}>
+                  <MenuItem
+                    onClick={() => logout(navigate)}
+                    disabled={isLoggingOut}
+                  >
                     {isLoggingOut ? "Logging out..." : "Logout"}
                   </MenuItem>
                 </MenuList>

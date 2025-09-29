@@ -17,6 +17,8 @@ import FellowDetailsPage from "./pages/Fellows/FellowDetailsPage";
 import UpdateItemPage from "./pages/Items/UpdateItemPage";
 import PublicRoute from "./components/PublicRoute";
 import UpdateFellowPage from "./pages/Fellows/UpdateFellowPage";
+import SpendingDetailsPage from "./pages/Spending/SpendingDetailsPage";
+import UpdateSpendingPage from "./pages/Spending/UpdateSpendingPage";
 
 const App = () => {
   return (
@@ -73,6 +75,10 @@ const App = () => {
           <Route path="spendings">
             <Route index element={<SpendingsPage />} />
             <Route path="addSpending" element={<AddSpendingPage />} />
+            <Route path=":spendingId">
+              <Route index element={<SpendingDetailsPage />} />
+              <Route path="edit" element={<UpdateSpendingPage />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
