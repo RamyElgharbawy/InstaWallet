@@ -19,6 +19,8 @@ import PublicRoute from "./components/PublicRoute";
 import UpdateFellowPage from "./pages/Fellows/UpdateFellowPage";
 import SpendingDetailsPage from "./pages/Spending/SpendingDetailsPage";
 import UpdateSpendingPage from "./pages/Spending/UpdateSpendingPage";
+import UpdateUserProfilePage from "./pages/UpdateUserProfilePage";
+import ChangeUserPasswordPage from "./pages/ChangeUserPasswordPage";
 
 const App = () => {
   return (
@@ -51,7 +53,14 @@ const App = () => {
         <Route path="/user" element={<DashboardLayout />}>
           <Route index element={<UserDashboard />} />
           <Route path="statistics" element={<UserDashboard />} />
-          <Route path="profile" element={<UserProfilePage />} />
+          <Route path="profile">
+            <Route index element={<UserProfilePage />} />
+            <Route path="edit/:userId" element={<UpdateUserProfilePage />} />
+            <Route
+              path="changePassword/:userId"
+              element={<ChangeUserPasswordPage />}
+            />
+          </Route>
           {/* User Fellows Route */}
           <Route path="fellows">
             <Route index element={<FellowsPage />} />

@@ -12,14 +12,22 @@ import {
   Divider,
   VStack,
 } from "@chakra-ui/react";
-import { useAuth } from "../hooks/auth/authHook";
+import { useProfile } from "../hooks/profileHook";
+import { Link, useLocation } from "react-router-dom";
 
 export default function UserProfilePage() {
+  // get current location
+  const currentLocation = useLocation();
+
   // auth-hook mutations
-  const { logout, isLoggingOut, user, isLoadingUser } = useAuth();
+  const { user } = useProfile();
 
   // filter user data
   const userData = user?.data || {};
+
+  // create navigation path
+  const editPath = `${currentLocation.pathname}/edit/${userData.id}`;
+  const passPath = `${currentLocation.pathname}/changePassword/${userData.id}`;
 
   return (
     <Center py={6}>
@@ -91,16 +99,17 @@ export default function UserProfilePage() {
 
         <Stack mt={8} direction={"row"} spacing={4}>
           <Button
+            as={Link}
+            to={passPath}
             flex={1}
             fontSize={"sm"}
             rounded={"full"}
-            _focus={{
-              bg: "gray.200",
-            }}
           >
             Change Password
           </Button>
           <Button
+            as={Link}
+            to={editPath}
             flex={1}
             fontSize={"sm"}
             rounded={"full"}

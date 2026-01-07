@@ -13,6 +13,8 @@ import {
 import type { IconType } from "react-icons";
 import { SiShopify } from "react-icons/si";
 import { TbMoneybag, TbPigMoney, TbReportMoney } from "react-icons/tb";
+import { useAuth } from "../hooks/auth/authHook";
+import type { IFellow, IItem } from "../interfaces";
 
 interface ICardProps {
   cardTitle: string;
@@ -47,35 +49,63 @@ const StatisticCard = ({
     </Card>
   );
 };
-// statistic array
-const statsArray: Array<ICardProps> = [
-  {
-    cardTitle: "Wallet Balance",
-    cardIcon: TbMoneybag,
-    cardBody: "202054 $",
-    cardStats: "Total Balance",
-  },
-  {
-    cardTitle: "Active Loans",
-    cardIcon: TbReportMoney,
-    cardBody: "202054 $",
-    cardStats: "Solfa",
-  },
-  {
-    cardTitle: "Active Fellows",
-    cardIcon: TbPigMoney,
-    cardBody: "202054 $",
-    cardStats: "Hassan Fellow",
-  },
-  {
-    cardTitle: "Active Installments",
-    cardIcon: SiShopify,
-    cardBody: "202054 $",
-    cardStats: "IPhone 16",
-  },
-];
 
 const StatisticSection = () => {
+  const { user } = useAuth();
+  // filter user data
+  const userData = user?.data || {};
+
+  // calculate total fellows amount
+  const totalFellowsAmount = userData.fellows.reduce(
+    (sum: number, fellow: IFellow) => sum + fellow.amount,
+    0
+  );
+
+  // calculate active installment
+  const activeInstallment = userData.items.filter(
+    (item: IItem) => item.type === "purchaseItem" && item.status === "remaining"
+  );
+  const activeInstallmentAmount = activeInstallment.reduce(
+    (sum: number, ins: IItem) => sum + ins.monthlyAmount,
+    0
+  );
+
+  // calculate active loans amount
+  const activeLoans = userData.items.filter(
+    (item: IItem) => item.type === "loan" && item.status === "remaining"
+  );
+  const activeLoansAmount = activeLoans.reduce(
+    (sum: number, loan: IItem) => sum + loan.monthlyAmount,
+    0
+  );
+
+  // statistic array
+  const statsArray: Array<ICardProps> = [
+    {
+      cardTitle: "Wallet Balance",
+      cardIcon: TbMoneybag,
+      cardBody: `${userData.salary} $`,
+      cardStats: "Total Balance",
+    },
+    {
+      cardTitle: "Active Loans",
+      cardIcon: TbReportMoney,
+      cardBody: `${activeLoansAmount} $`,
+      cardStats: "Total Loans Amount",
+    },
+    {
+      cardTitle: "Active Fellows",
+      cardIcon: TbPigMoney,
+      cardBody: `${totalFellowsAmount} $`,
+      cardStats: "Total Fellows Amount",
+    },
+    {
+      cardTitle: "Active Installments",
+      cardIcon: SiShopify,
+      cardBody: `${activeInstallmentAmount} $`,
+      cardStats: "Total Installments",
+    },
+  ];
   return (
     <SimpleGrid
       p={3}

@@ -9,6 +9,12 @@ const ItemDetailsPage = () => {
   // validate item data
   const itemData = item?.data || {};
 
+  // get shares depends on there status
+  const shares = itemData.shares;
+
+  const paidShares = shares?.filter((share: any) => share.payStatus);
+  const remainingShares = shares?.filter((share: any) => !share.payStatus);
+
   if (isLoadingItem)
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
@@ -26,14 +32,14 @@ const ItemDetailsPage = () => {
       <TableWithHeading
         tvariant="simple"
         title="Shares Breakdown"
-        tableData={itemData.shares}
+        tableData={paidShares}
       />
 
       {/* Remaining shares table */}
       <TableWithHeading
         tvariant="striped"
         title="Remaining Shares"
-        tableData={itemData.shares}
+        tableData={remainingShares}
         withButton
       />
     </Box>

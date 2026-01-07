@@ -1,7 +1,6 @@
 import { Box, Button, Icon, SimpleGrid, Text } from "@chakra-ui/react";
 import type { IconType } from "react-icons";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
-import { FcMoneyTransfer } from "react-icons/fc";
 import { SiShopify } from "react-icons/si";
 import { TbPigMoney } from "react-icons/tb";
 import { Link as RouterLink } from "react-router-dom";
@@ -32,7 +31,7 @@ const ActionButton = ({ icon, title, path }: IAButtonProps) => {
 
 const buttonArray: Array<IAButtonProps> = [
   { icon: SiShopify, title: "Add New Item", path: "/user/items/addItem" },
-  { icon: FcMoneyTransfer, title: "Add New Loan", path: "/user/loan/addLoan" },
+
   {
     icon: TbPigMoney,
     title: "Add New Fellow",

@@ -10,6 +10,12 @@ const FellowDetailsPage = () => {
   // validate fellow data
   const fellowData = fellow?.data || {};
 
+  // get shares depends on there status
+  const shares = fellowData.shares;
+
+  const paidShares = shares?.filter((share: any) => share.payStatus);
+  const remainingShares = shares?.filter((share: any) => !share.payStatus);
+
   if (isLoadingFellow)
     return (
       <Box ml={{ base: 0, md: 60 }} p={4}>
@@ -29,14 +35,14 @@ const FellowDetailsPage = () => {
       <TableWithHeading
         tvariant="simple"
         title="Shares Breakdown"
-        tableData={fellowData.shares}
+        tableData={paidShares}
       />
 
       {/* Remaining shares table */}
       <TableWithHeading
         tvariant="striped"
         title="Remaining Shares"
-        tableData={fellowData.shares}
+        tableData={remainingShares}
         withButton
       />
     </Box>
