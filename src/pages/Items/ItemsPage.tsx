@@ -3,12 +3,17 @@ import ActiveSection from "../../components/shared/ActiveSection";
 import TableWithHeading from "../../components/shared/TableWithHeading";
 import { useItems } from "../../hooks/itemsHook";
 import AppAlert from "../../components/shared/ErrorAlert";
+import type { IItem } from "../../interfaces";
 
 const ItemsPage = () => {
   const { isLoadingItems, itemsList, isItemsError, itemsError } = useItems();
 
   // validate items data
   const items = itemsList?.data || [];
+  // filter active items
+  const activeItems = items.filter(
+    (item: IItem) => item.status === "remaining"
+  );
 
   if (isLoadingItems)
     return (
@@ -19,7 +24,7 @@ const ItemsPage = () => {
 
   return (
     <Box ml={{ base: 0, md: 60 }} p="4">
-      <ActiveSection name="Item" data={items} />
+      <ActiveSection name="Item" data={activeItems} />
 
       <Divider borderWidth={"thin"} mt={7} />
 

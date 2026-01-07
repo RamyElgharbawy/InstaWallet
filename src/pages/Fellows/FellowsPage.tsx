@@ -3,6 +3,7 @@ import TableWithHeading from "../../components/shared/TableWithHeading";
 import ActiveSection from "../../components/shared/ActiveSection";
 import AppAlert from "../../components/shared/ErrorAlert";
 import { useFellows } from "../../hooks/fellowsHook";
+import type { IFellow } from "../../interfaces";
 
 const FellowsPage = () => {
   // get fellows data
@@ -10,6 +11,10 @@ const FellowsPage = () => {
     useFellows();
   // validate fellows data
   const fellows = fellowsList?.data || [];
+  // filter active items
+  const activeFellows = fellows.filter(
+    (fellows: IFellow) => fellows.status === "remaining"
+  );
 
   if (isLoadingFellows)
     return (
@@ -20,7 +25,7 @@ const FellowsPage = () => {
 
   return (
     <Box ml={{ base: 0, md: 60 }} p={4}>
-      <ActiveSection name="Fellow" data={fellows} />
+      <ActiveSection name="Fellow" data={activeFellows} />
 
       <Divider borderWidth={"thin"} mt={7} />
 
